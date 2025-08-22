@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/uddf.svg)](https://badge.fury.io/rb/uddf)
+
 # UDDF
 
 Ruby parser and validator for Universal Dive Data Format (UDDF) files. Supports multiple UDDF versions with version-specific model loading.
