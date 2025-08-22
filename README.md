@@ -1,35 +1,68 @@
-# Uddf
+# UDDF
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/uddf`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby parser and validator for Universal Dive Data Format (UDDF) files. Supports multiple UDDF versions with version-specific model loading.
 
-TODO: Delete this and the text above, and describe your gem
+## Features
+
+- Parse UDDF XML files into Ruby objects using HappyMapper
+- Automatic version detection from UDDF files
+- Version-specific model loading
+- XML schema validation
+- Extensible architecture for multiple UDDF versions
+
+### Supported Versions
+
+| UDDF Version | Parser | Validator |
+|--------------|--------|-----------|
+| 3.0.0        | ✗      | ✓         |
+| 3.0.1        | ✗      | ✓         |
+| 3.1.0        | ✗      | ✓         |
+| 3.2.0        | ✗      | ✓         |
+| 3.2.1        | ✗      | ✓         |
+| 3.2.2        | ✗      | ✓         |
+| 3.2.3        | ✓      | ✓         |
+| 3.3.0        | ✗      | ✓         |
+| 3.3.1        | ✗      | ✓         |
+
+## Usage
+
+```ruby
+require 'uddf'
+
+# Load and parse a UDDF file (auto-detects version)
+dive_data = UDDF.load('path/to/dive.uddf')
+
+# Parse UDDF XML string directly
+dive_data = UDDF.parse(xml_string)
+
+# Force a specific version (bypasses auto-detection)
+dive_data = UDDF.load('path/to/dive.uddf', force_version: '3.2.3')
+dive_data = UDDF.parse(xml_string, force_version: '3.2.3')
+
+# Validate UDDF XML against schema
+errors = UDDF.validate(xml_string)
+errors = UDDF.validate(xml_string, force_version: '3.2.3')
+
+# Access parsed data
+puts dive_data.generator.name
+dive_data.profile_data.repetition_groups.each do |group|
+  group.dives.each do |dive|
+    puts "Depth: #{dive.information_after_dive&.greatest_depth}m"
+  end
+end
+```
 
 ## Installation
-
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'uddf'
 ```
 
-And then execute:
+## Architecture
 
-    $ bundle install
+The gem uses a modular architecture with version-specific models:
 
-Or install it yourself as:
+- `UDDF::Models::Base` - Shared base models across versions
+- `UDDF::Models::V323` - UDDF 3.2.3 specific models
+- Automatic model loading based on file version attribute
 
-    $ gem install uddf
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/uddf.

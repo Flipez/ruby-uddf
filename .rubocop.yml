@@ -1,5 +1,11 @@
+plugins: rubocop-rake
+
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.4
+
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
 
 Style/StringLiterals:
   Enabled: true
@@ -11,3 +17,12 @@ Style/StringLiteralsInInterpolation:
 
 Layout/LineLength:
   Max: 120
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "lib/uddf/v323/models.rb"
