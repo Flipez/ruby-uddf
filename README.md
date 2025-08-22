@@ -26,6 +26,8 @@ Ruby parser and validator for Universal Dive Data Format (UDDF) files. Supports 
 | 3.3.0        | ✗      | ✓         |
 | 3.3.1        | ✗      | ✓         |
 
+> **Note**: The UDDF 3.3.0 and 3.3.1 schema files included in this gem have been locally modified to fix XML Schema validation errors that prevented them from loading with Nokogiri. These fixes address syntax issues in the original schemas but may not represent the upstream maintainers' intentions. The modifications ensure compatibility with standard XML Schema validators while preserving the core schema structure and validation rules.
+
 ## Usage
 
 ```ruby
