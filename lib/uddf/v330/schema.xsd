@@ -600,11 +600,13 @@ Ende auskommentiert von Kai -->
         <xs:complexContent>
             <xs:extension base="equipmentPieceType">
                 <xs:sequence>
-                    <xs:element name="softwareupdate" type="ID_TYPE">
-                        <xs:sequence>
-                            <xs:element name="softwareversion" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                            <xs:element name="datetime" type="xs:dateTime"/>
-                        </xs:sequence>
+                    <xs:element name="softwareupdate">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="softwareversion" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                <xs:element name="datetime" type="xs:dateTime"/>
+                            </xs:sequence>
+                        </xs:complexType>
                     </xs:element>
                     <xs:element name="battery" maxOccurs="unbounded" minOccurs="0" type="ID_TYPE"/>
                     <xs:element name="timerdevice" maxOccurs="unbounded" minOccurs="0" type="ID_TYPE"/>
@@ -1238,7 +1240,7 @@ Ende auskommentiert von Kai -->
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="timer" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="timer" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:float">
@@ -1308,19 +1310,11 @@ Ende auskommentiert von Kai -->
         </xs:all>
     </xs:complexType>
     <xs:complexType name="selftestType">
-        <xs:complexType>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="failed"/>
-                    <xs:enumeration value="passed"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleContent>
-                <xs:extension base="xs:string">
-                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
-                </xs:extension>
-            </xs:simpleContent>
-        </xs:complexType>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
     <xs:complexType name="surfaceintervalType">
         <xs:sequence>
@@ -1434,7 +1428,7 @@ Ende  Vermutlich nicht notwendig, deshalb ab v3.3.0 auskommentiert -->
             <xs:element name="divetime" type="xs:float" minOccurs="0"/>
             <xs:element name="heading" type="xs:float" minOccurs="0"/>
             <xs:element name="heartrate" type="xs:float" minOccurs="0"/>
-            <xs:element name="info" base="infoType" minOccurs="0"/>
+            <xs:element name="info" type="infoType" minOccurs="0"/>
             <xs:element name="otu" type="xs:float" minOccurs="0"/>
             <xs:element name="pulserate" type="xs:float" minOccurs="0"/>
             <xs:element name="remainingbottomtime" type="xs:float" minOccurs="0"/>
@@ -2018,7 +2012,7 @@ Ende  Vermutlich nicht notwendig, deshalb ab v3.3.0 auskommentiert -->
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="infoType">
-        <xs:attribute name="ref" type="linkType" use="required">
+        <xs:attribute name="ref" type="xs:IDREF" use="required"/>
         <xs:attribute name="level" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
