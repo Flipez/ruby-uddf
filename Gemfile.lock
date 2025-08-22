@@ -20,6 +20,8 @@ GEM
     lint_roller (1.1.0)
     nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-gnu)
+      racc (~> 1.4)
     nokogiri-happymapper (0.10.0)
       nokogiri (~> 1.5)
     parallel (1.27.0)
@@ -67,6 +69,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   irb
