@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     uddf (0.2.0)
+      nokogiri (~> 1.18)
       nokogiri-happymapper
 
 GEM
@@ -20,9 +21,9 @@ GEM
     json (2.13.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
-    nokogiri (1.17.2-arm64-darwin)
+    nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.17.2-x86_64-linux)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     nokogiri-happymapper (0.10.0)
       nokogiri (~> 1.5)
@@ -81,4 +82,4 @@ DEPENDENCIES
   uddf!
 
 BUNDLED WITH
-   2.5.23
+   2.7.1
