@@ -42,7 +42,7 @@ module UDDF
       @schema_cache ||= {}
       @schema_cache[version] ||= begin
         validate_version_support(version, :schema)
-        schema_path = File.join(__dir__, "uddf", "v#{version.tr('.', '')}", "schema.xsd")
+        schema_path = File.join(__dir__, "uddf", "v#{version.tr(".", "")}", "schema.xsd")
         Nokogiri::XML::Schema.new(File.read(schema_path))
       end
     end
@@ -58,8 +58,6 @@ module UDDF
     end
   end
 
-  private
-
   def self.validate_version_support(version, operation)
     supported = case operation
                 when :parse then SUPPORTED_PARSER_VERSIONS
@@ -67,6 +65,7 @@ module UDDF
                 end
 
     return if supported.include?(version)
+
     raise "Unsupported UDDF version for #{operation}, got '#{version}'"
   end
 end
