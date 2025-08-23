@@ -62,6 +62,36 @@ end
 gem 'uddf'
 ```
 
+## Date Format Support
+
+The UDDF parser supports multiple date/time formats in `<datetime>` elements:
+
+| Format | Example | Description |
+|--------|---------|-------------|
+| **Full ISO 8601** | `2024-03-21T14:30:00Z` | Complete date and time with timezone |
+| **Date only** | `2024-03-21` | ISO 8601 date format |
+| **Year-Month** | `2024-03` | Year and month only (defaults to 1st day) |
+| **Year only** | `2024` | Year only (defaults to January 1st) |
+| **RFC 3339** | `2024-03-21T14:30:00+02:00` | RFC 3339 compliant timestamps |
+
+### Date Parsing Behavior
+
+- **Year-only format** (`YYYY`): Parsed as January 1st of that year
+- **Year-month format** (`YYYY-MM`): Parsed as the 1st day of that month
+- **Empty dates**: Gracefully handled without throwing errors
+- **Fallback parsing**: If ISO 8601 parsing fails, falls back to RFC 3339, then general date parsing
+
+Example usage in UDDF files:
+```xml
+<nextservicedate>
+    <datetime>2025-06</datetime>  <!-- June 1st, 2025 -->
+</nextservicedate>
+
+<birthdate>
+    <datetime>1985</datetime>     <!-- January 1st, 1985 -->
+</birthdate>
+```
+
 ## Architecture
 
 The gem uses a modular architecture with version-specific models:
