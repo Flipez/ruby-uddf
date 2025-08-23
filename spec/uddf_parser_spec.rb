@@ -91,7 +91,7 @@ end
 
 describe "UDDF Parser" do
   describe "parsing Peregrine TX UDDF file" do
-    let(:file_path) { File.join(__dir__, "../test_files/v323/Peregrine TX[93CBB2BB]#140_2025-03-21.uddf") }
+    let(:file_path) { File.join(__dir__, "../test_files/v323/realworld/Peregrine TX[93CBB2BB]#140_2025-03-21.uddf") }
     let(:uddf_data) { parse_uddf_file(file_path) }
 
     it "successfully parses the UDDF file" do

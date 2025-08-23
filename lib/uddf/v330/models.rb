@@ -503,23 +503,6 @@ module UDDF
         has_one :notes, Notes
       end
 
-      class Species
-        include HappyMapper
-
-        tag "species"
-
-        attribute :id, String
-        has_one :abundance, "Abundance"
-        has_one :age, Integer
-        has_one :dominance, String
-        has_one :life_stage, String, tag: "lifestage"
-        has_one :notes, Notes
-        has_one :scientific_name, String, tag: "scientificname"
-        has_one :sex, String
-        has_one :size, Float
-        has_one :trivial_name, String, tag: "trivialname"
-      end
-
       class Abundance
         include HappyMapper
 
@@ -528,6 +511,23 @@ module UDDF
         attribute :quality, String
         attribute :occurrence, String
         content :value, Integer
+      end
+
+      class Species
+        include HappyMapper
+
+        tag "species"
+
+        attribute :id, String
+        has_one :abundance, Abundance
+        has_one :age, Integer
+        has_one :dominance, String
+        has_one :life_stage, String, tag: "lifestage"
+        has_one :notes, Notes
+        has_one :scientific_name, String, tag: "scientificname"
+        has_one :sex, String
+        has_one :size, Float
+        has_one :trivial_name, String, tag: "trivialname"
       end
 
       class WithSpecies
