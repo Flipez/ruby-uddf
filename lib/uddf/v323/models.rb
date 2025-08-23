@@ -969,7 +969,7 @@ module UDDF
 
         tag "built"
 
-        has_one :launching_date, Date, tag: "launchingdate"
+        has_one :launching_date, Base::Models::DateTimeField, tag: "launchingdate"
         has_one :ship_yard, String, tag: "shipyard"
       end
 
@@ -984,7 +984,7 @@ module UDDF
         has_one :nationality, String
         has_one :ship_dimension, ShipDimension, tag: "shipdimension"
         has_one :ship_type, String, tag: "shiptype"
-        has_one :sunk, Date
+        has_one :sunk, Base::Models::DateTimeField
       end
 
       class Shore
@@ -1153,8 +1153,8 @@ module UDDF
 
         tag "numberofdives"
 
-        has_one :start_date, Date, tag: "startdate"
-        has_one :end_date, Date, tag: "enddate"
+        has_one :start_date, DateTime, tag: "startdate"
+        has_one :end_date, DateTime, tag: "enddate"
         has_one :dives, Integer
       end
 
@@ -1163,7 +1163,7 @@ module UDDF
 
         tag "personal"
 
-        has_one :birth_date, Date, tag: "birthdate"
+        has_one :birth_date, Base::Models::DateTimeField, tag: "birthdate"
         has_one :birth_name, String, tag: "birthname"
         has_one :blood_group, String, tag: "bloodgroup"
         has_one :first_name, String, tag: "firstname"
@@ -1195,12 +1195,12 @@ module UDDF
 
         has_one :certificate_number, String, tag: "certificatenumber"
         has_one :instructor, Instructor
-        has_one :issue_date, Date, tag: "issuedate"
+        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :level, String
         has_one :link, Link
         has_one :organization, String
         has_one :specialty, String
-        has_one :valid_date, Date, tag: "validdate"
+        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
       end
 
       class Education
@@ -1217,10 +1217,10 @@ module UDDF
         tag "insurance"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :issue_date, Date, tag: "issuedate"
+        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :name, String
         has_one :notes, Notes
-        has_one :valid_date, Date, tag: "validdate"
+        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
       end
 
       class DiveInsurances
@@ -1237,11 +1237,11 @@ module UDDF
         tag "permit"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :issue_date, Date, tag: "issuedate"
+        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :name, String
         has_one :notes, Notes
         has_one :region, String
-        has_one :valid_date, Date, tag: "validdate"
+        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
       end
 
       class DivePermissions
@@ -1274,7 +1274,7 @@ module UDDF
         has_one :manufacturer, Manufacturer
         has_one :model, String
         has_one :name, String
-        has_one :next_service_date, Date, tag: "nextservicedate"
+        has_one :next_service_date, Base::Models::DateTimeField, tag: "nextservicedate"
         has_one :notes, Notes
         has_one :purchase, Purchase
         has_one :serial_number, String, tag: "serialnumber"

@@ -94,7 +94,7 @@
                 <honorific>Dr.</honorific>
                 <sex>male</sex>
                 <birthdate>
-                    <datetime>1919-02-30</datetime>
+                    <datetime>1919-02-28</datetime>
                 </birthdate>
                 <passport>987654321</passport>
                 <height>1.8</height>
@@ -173,7 +173,7 @@
                             <honorific>Dr.</honorific>
                             <sex>male</sex>
                             <birthdate>
-                                <!-- falls Geburtsdaten bekannt, können sie hier angegeben werden -->
+                                <datetime>1919-02-28</datetime>
                             </birthdate>
                         </personal>
                         <address>

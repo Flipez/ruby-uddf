@@ -63,6 +63,7 @@ module UDDFParserHelpers
 
   def validate_multiple_uddf_files(file_paths, expected_dive_counts = {})
     file_paths.each do |file_path|
+      puts "Testing file: #{file_path}"
       uddf_data = parse_uddf_file(file_path)
 
       expect(uddf_data).not_to be_nil

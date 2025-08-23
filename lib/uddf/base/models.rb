@@ -38,9 +38,7 @@ module UDDF
       class DateTimeField
         include HappyMapper
 
-        tag "datetime"
-
-        content :value, DateTime
+        has_one :date_time, DateTime, tag: "datetime"
       end
     end
   end
