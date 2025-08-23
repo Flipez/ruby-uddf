@@ -38,40 +38,37 @@ module UDDF
       class DateTimeField
         include HappyMapper
 
-        def self.parse(xml, options = {})
-          result = super
-          return result if result.nil?
+        element :raw, String, tag: "datetime"
 
-          # Handle empty or whitespace-only content
-          if result.date_time.nil? || (result.date_time.respond_to?(:strip) && result.date_time.strip.empty?)
-            element_name = xml.name
-            parent_name = xml.parent&.name
-            context = parent_name ? "#{parent_name} > #{element_name}" : element_name
-            raise Date::Error, "Empty datetime content in element: <#{context}>"
-          end
+        # Lazily parse on first access; memoize in @date_time
+        def date_time
+          return @date_time if @date_time
 
-          result
-        rescue Date::Error => e
-          # Handle year-only dates by converting to January 1st of that year
-          datetime_element = xml.at_xpath(".//datetime")
-          if datetime_element && datetime_element.content.strip.match(/^\d{4}$/)
-            year = datetime_element.content.strip
-            result = new
-            result.date_time = DateTime.new(year.to_i, 1, 1)
-            return result
-          end
+          content = raw.to_s.strip
+          return nil if content.empty?
 
-          # Re-raise Date::Error with element context if not already included
-          unless e.message.include?("element:")
-            element_name = xml.name
-            parent_name = xml.parent&.name
-            context = parent_name ? "#{parent_name} > #{element_name}" : element_name
-            raise Date::Error, "#{e.message} in element: <#{context}>"
-          end
-          raise
+          @date_time =
+            case content
+            when /^\d{4}$/               # "YYYY"
+              DateTime.new(content.to_i, 1, 1)
+            when /^\d{4}-\d{2}$/         # "YYYY-MM"
+              y, m = content.split("-").map!(&:to_i)
+              DateTime.new(y, m, 1)
+            else
+              begin
+                DateTime.iso8601(content)
+              rescue ArgumentError, Date::Error
+                begin
+                  DateTime.rfc3339(content)
+                rescue ArgumentError, Date::Error
+                  DateTime.parse(content)
+                end
+              end
+            end
         end
 
-        has_one :date_time, DateTime, tag: "datetime"
+        # Allow manual assignment if you ever need it
+        attr_writer :date_time
       end
     end
   end
