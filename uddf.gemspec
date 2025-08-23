@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rake", "~> 0.7"
   spec.add_development_dependency "rubocop-rspec", "~> 3.6"
   spec.add_development_dependency "simplecov", "~> 0.21"
+  spec.add_development_dependency "simplecov-cobertura", "~> 3"
 end

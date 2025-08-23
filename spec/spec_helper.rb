@@ -3,6 +3,9 @@
 require "simplecov"
 SimpleCov.start
 
+require "simplecov-cobertura"
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+
 require_relative "../lib/uddf"
 
 RSpec.configure do |config|
