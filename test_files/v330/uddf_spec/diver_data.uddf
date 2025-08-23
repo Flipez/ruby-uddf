@@ -94,15 +94,15 @@
                 <honorific>Dr.</honorific>
                 <sex>male</sex>
                 <birthdate>
-                    <datetime>1919-02-30</datetime>
-                </birthdate
+                    <datetime>1919-02-28</datetime>
+                </birthdate>
                 <passport>987654321</passport>
                 <height>1.8</height>
                 <weight>86.0</weight>
                 <smoking>0</smoking>
                 <bloodgroup>A</bloodgroup>
                 <numberofdives timeinterval="P13Y/2006-02-16" dives="1234"/>
-                <membership organisation=="VDST/CMAS" memberid="123456"/>
+                <membership organisation="VDST/CMAS" memberid="123456"/>
             </personal>
             <address>
                 <street>Auf der Heide 12</street>
@@ -173,8 +173,8 @@
                             <honorific>Dr.</honorific>
                             <sex>male</sex>
                             <birthdate>
-                                <!-- falls Geburtsdaten bekannt, können sie hier angegeben werden -->
-                            </birthdate
+                                <datetime>1919-02-28</datetime>
+                            </birthdate>
                         </personal>
                         <address>
                             <street>Duddelstr. 34</street>

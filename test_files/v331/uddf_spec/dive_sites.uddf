@@ -1,0 +1,211 @@
+<uddf version="3.3.1">
+    <!-- die <generator>-Sektion muß in jeder UDDF-Datei stehen -->
+    <generator>
+        <!-- Beschreibung des die UDDF-Datei erzeugenden Programmes -->
+        ...
+    </generator>
+    <mediadata>
+        <video id="video_rm2003">
+            <title>Tauchurlaub Rotes Meer 2003</title>
+            <objectname>rm2003.avi</objectname>
+        </video>
+        <video id="video_tst2004">
+            <title>Tauch-Segeltörn 2004</title>
+            <objectname>tst2004.avi</objectname>
+        </video>
+    </mediadata>
+    <divesite>
+        <!-- ZUERST Beschreibungen aller Tauchbasen -->
+        <divebase id="db_deep-down">
+            <name>Deep Down</name>
+            <contact>
+                <email>info@deep-down-diving.com</email>
+                <homepage>http://www.deep-down-diving.com</homepage>
+            </contact>
+            <priceperdive currency="USD">40.00</priceperdive>
+            <pricedivepackage currency="USD" noofdives="10">350.00</pricedivepackage>
+            <guide>
+                <!-- Tauchguide bereits als <buddy> beschrieben, deshalb hier nur Referenzierung -->
+                <link ref="buddy_Georg"/>
+            </guide>
+            <guide>
+                <!-- 2. Tauchguide bereits ebenfalls als <buddy> beschrieben... -->
+                <link ref="buddy_Hansi_der_Luftschlucker"/>
+            </guide>
+            <rating>
+                <ratingvalue>7</ratingvalue>
+            </rating>
+        </divebase>
+        <!-- NACH den aufgeführten Tauchbasen folgen die Beschreibungen aller Tauchplätze -->
+        <site id="site_Scapa_Brummer">
+            <!-- Beschreibung des ersten erfaßten Tauchplatzes -->
+            <name>Brummer</name>
+            <geography>
+                <location>Scapa Flow</location>
+                <address>
+                    <province>Orkney Islands</province>
+                    <country>UK</country>
+                </address>
+                <!-- Breitengrad: Nord > 0 / Süd < 0 -->
+                <latitude>58.897222</latitude>
+                <!-- Längengrad: Ost > 0 / West < 0 -->
+                <longitude>-3.1519444</longitude>
+                <altitude>0.0</altitude>
+            </geography>
+            <sitedata>
+                <maximumdepth>37.0</maximumdepth>
+                <density>1030.0</density>   <!-- Salzwasser -->
+                <bottom>Sandboden</bottom>
+                <wreck id="wreck_Brummer">
+                    <name>SMS Brummer</name>
+                    <shiptype>leichter Kreuzer</shiptype>
+                    <nationality>deutsch</nationality>
+                    <built>
+                        <shipyard>Vulcan, Stettin</shipyard>
+                        <launchingdate>
+                            <datetime>1916</datetime>
+                        </launchingdate>
+                    </built>
+                    <shipdimension>
+                        <length>140.0</length>
+                        <beam>13.0</beam>
+                        <draught>6.0</draught>
+                        <displacement>4.385E6</displacement>
+                    </shipdimension>
+                    <sunk>
+                        <datetime>1919-06-21T13:05</datetime>
+                    </sunk>
+                    <notes>
+                        <para>Deutsche Hochsee-Flotte</para>
+                    </notes>
+                </wreck>
+            </sitedata>
+            <notes>
+                <para>Sehr schöner Wrack-Tauchgang</para>
+            </notes>
+        </site>
+        <!-- weitere Tauchspots -->
+    </divesite>
+    <divetrip>
+        <!-- es folgen alle dokumentierten Tauchfahrten -->
+        <trip id="trip_urlaub2003">
+            <trippart type="hoteltrip, organizedtrip">
+                <name>Vereinsfahrt Rotes Meer 2003</name>
+                <dateoftrip startdate="2003-04-12" enddate="2003-04-19"/>
+                <geography>
+                    <location>Rotes Meer</location>
+                    <address>
+                        <city>Hurghada</city>
+                        <country>Ägypten</country>
+                    </address>
+                </geography>
+                <accommodation>
+                    <name>Hotel 1000 und 1 Nacht</name>
+                    <category>Hotel</category>
+                    <contact>
+                        <email>info@hotel-1000-und-1-nacht.com</email>
+                        <homepage>http://www.hotel-1000-und-1-nacht.com</homepage>
+                    </contact>
+                    <rating>
+                        <ratingvalue>6</ratingvalue>
+                    </rating>
+                </accommodation>
+                <link ref="db_deep-down"/>   <!-- Tauchbasis, bei der die TGs durchgeführt wurden -->
+                <notes>
+                    <para>schöner Tauchurlaub - wenn nicht so viele andere Taucher dort wären...</para>
+                    <link ref="video_rm2003"/>
+                </notes>
+            </trippart>
+        </trip>
+        <trip id="trip_urlaub2004">
+            <trippart type="boattrip, individualtrip">
+                <name>Tauch-Segeltörn 2004</name>
+                <dateoftrip startdate="2004-09-24" enddate="2004-10-03"/>
+                <geography>
+                    <address>
+                        <province>Cote d'Azur</province>
+                        <country>Frankreich</country>
+                    </address>
+                </geography>
+                <vessel>
+                    <name>Dorade</name>
+                    <shiptype>Segelyacht</shiptype>
+                    <marina>Bormes les Mimosas</marina>
+                    <shipdimension>
+                        <!-- nur Länge und Breite bekannt -->
+                        <length>14.6</length>
+                        <beam>3.5</beam>
+                    </shipdimension>
+                </vessel>
+                <relateddives>
+                    <link ref="tg_530"/><link ref="tg_531"/><link ref="tg_532"/><link ref="tg_533"/>
+                    <link ref="tg_534"/><link ref="tg_535"/><link ref="tg_536"/><link ref="tg_537"/>
+                    <link ref="tg_538"/><link ref="tg_539"/><link ref="tg_540"/><link ref="tg_541"/>
+                </relateddives>
+                <notes>
+                    <para>Unser Motto: Wir tauchen das, wovon andere träumen!!! :-)</para>
+                    <link ref="video_tst2004"/>
+                </notes>
+            </trippart>
+        </trip>
+        <trip id="trip_urlaub2005">
+            <name>Vereinsfahrt Korsika 2005</name>
+            <trippart type="boattrip, organizedtrip">
+                <name>Vereinsfahrt Korsika 2005 - 1 Woche Galiote</name>
+                <dateoftrip startdate="2005-05-21" enddate="2005-05-28"/>
+                <geography>
+                    <location>Mittelmeer</location>
+                    <address>
+                        <country>Korsika</country>
+                    </address>
+                </geography>
+                <vessel>
+                    <name>Galiote</name>
+                    <shiptype>Motoryacht</shiptype>
+                    <!-- andere Daten nicht bekannt -->
+                </vessel>
+                <relateddives>
+                    <link ref="tg_580"/><link ref="tg_581"/><link ref="tg_582"/><link ref="tg_583"/>
+                    <link ref="tg_584"/><link ref="tg_585"/><link ref="tg_586"/><link ref="tg_587"/>
+                    <link ref="tg_588"/><link ref="tg_589"/><link ref="tg_590"/><link ref="tg_591"/>
+                </relateddives>
+                <notes>
+                    <para>Schöner Tauchurlaub mit Günter und seiner Crew!</para>
+                    <link ref="video_galiote2005"/>
+                </notes>
+            </trippart>
+            <trippart type="individualtrip">
+                <name>Vereinsfahrt Korsika 2005 - 1 Woche Campingplatz und Tauchclub Nemo</name>
+                <dateoftrip startdate="2005-05-28" enddate="2005-06-05"/>
+                <geography>
+                    <address>
+                        <province></province>
+                        <country>Korsika</country>
+                    </address>
+                </geography>
+                <accommodation>
+                    <name>Camping Corse</name>
+                    <category>Camping</category>
+                    <contact>
+                        <email>info@camping-corse.com</email>
+                        <homepage>http://www.camping-corse.com</homepage>
+                    </contact>
+                    <rating>
+                        <ratingvalue>6</ratingvalue>
+                    </rating>
+                </accommodation>
+                <relateddives>
+                    <link ref="tg_592"/><link ref="tg_593"/><link ref="tg_594"/><link ref="tg_595"/>
+                    <link ref="tg_596"/><link ref="tg_597"/><link ref="tg_598"/><link ref="tg_599"/>
+                    <link ref="tg_600"/><link ref="tg_601"/><link ref="tg_602"/><link ref="tg_603"/>
+                </relateddives>
+                <notes>
+                    <para>Nette zweite Woche Korsika-Tauchurlaub!</para>
+                    <link ref="video_korsika2005"/>
+                </notes>
+            </trippart>
+        </trip>
+    </divetrip>
+    <!-- hier können weitere Sektionen folgen, z. B. die Tauchprofildaten  -->
+    <!-- oder zur Generierung von Austauchtabellen -->
+</uddf>

@@ -4,8 +4,63 @@ require "happymapper"
 require "uddf/base/models"
 
 module UDDF
-  module V323
+  module V330
     module Models
+      class Timer
+        include HappyMapper
+
+        tag "timer"
+
+        attribute :ref, String
+        content :value, Float
+      end
+
+      class SelfTest
+        include HappyMapper
+
+        tag "selftest"
+
+        attribute :ref, String
+        content :Value, String
+      end
+
+      class RebreatherSelfTest
+        include HappyMapper
+
+        tag "rebreatherselftest"
+
+        attribute :ref, String
+        content :value, String
+      end
+
+      class DeepStops
+        include HappyMapper
+
+        tag "deepstops"
+
+        has_one :deep_stop_time, Float, tag: "deepstoptime"
+        has_one :deep_stop_type, String, tag: "deepstoptype"
+      end
+
+      class ScrubberMonitor
+        include HappyMapper
+
+        tag "scrubbermonitor"
+
+        attribute :id, String
+      end
+
+      class Scrubber
+        include HappyMapper
+
+        tag "scrubber"
+
+        attribute :ref, String
+        attribute :units, String
+
+        content :value, Float
+      end
+
       class Manufacturer
         include HappyMapper
 
@@ -63,7 +118,7 @@ module UDDF
         tag "tissue"
 
         attribute :gas, String
-        attribute :half_life, Float, tag: "halflife"
+        attribute :half_life, Float
         attribute :number, Integer
         attribute :a, Float
         attribute :b, Float
@@ -145,7 +200,7 @@ module UDDF
 
         tag "wayaltitude"
 
-        attribute :way_time, Float, tag: "waytime"
+        attribute :way_time, Float
         content :value, Float
       end
 
@@ -205,14 +260,14 @@ module UDDF
 
         tag "setpo2"
 
-        attribute :set_by, String, tag: "setby"
+        attribute :set_by, String
         content :value, Float
       end
 
-      class MeasuredPo2
+      class PPo2
         include HappyMapper
 
-        tag "measuredpo2"
+        tag "ppo2"
 
         attribute :ref, String
         content :value, Float
@@ -241,8 +296,16 @@ module UDDF
         tag "decostop"
 
         attribute :kind, String
-        attribute :deco_depth, Float, tag: "decodepth"
+        attribute :deco_depth, Float
         attribute :duration, Float
+      end
+
+      class Battery
+        include HappyMapper
+
+        tag "battery"
+
+        attribute :ref, String
       end
 
       class BatteryChargeCondition
@@ -250,8 +313,16 @@ module UDDF
 
         tag "batterychargecondition"
 
-        attribute :device_ref, String, tag: "deviceref"
-        attribute :tank_ref, String, tag: "tankref"
+        attribute :ref, String
+        content :value, Float
+      end
+
+      class BatteryVoltage
+        include HappyMapper
+
+        tag "batteryvoltage"
+
+        attribute :ref, String
         content :value, Float
       end
 
@@ -261,8 +332,30 @@ module UDDF
         tag "alarm"
 
         attribute :level, Float
-        attribute :tank_ref, String, tag: "tankref"
+        attribute :tank_ref, String
         content :value, String
+      end
+
+      class Info
+        include HappyMapper
+
+        tag "info"
+
+        attribute :ref, String
+        attribute :level, String
+        attribute :type, String
+        attribute :values, Float
+        attribute :units, String
+      end
+
+      class PPCo2
+        include HappyMapper
+
+        tag "ppco2"
+
+        attribute :ref, String
+
+        content :value, Float
       end
 
       class Waypoint
@@ -272,6 +365,7 @@ module UDDF
 
         has_many :alarms, Alarm, tag: "alarm"
         has_many :battery_charge_conditions, BatteryChargeCondition, tag: "batterychargecondition"
+        has_many :battery_voltages, BatteryVoltage, tag: "batteryvoltage"
         has_one :calculated_po2, Float, tag: "calculatedpo2"
         has_one :cns, Float
         has_many :deco_stops, Decostop, tag: "decostop"
@@ -280,7 +374,7 @@ module UDDF
         has_one :dive_time, Float, tag: "divetime"
         has_one :gradient_factor, GradientFactor, tag: "gradientfactor"
         has_one :heading, Float
-        has_many :measured_po2s, MeasuredPo2, tag: "measuredpo2"
+        has_many :ppo2s, PPo2, tag: "ppo2"
         has_one :no_deco_time, Float, tag: "nodecotime"
         has_one :otu, Float
         has_one :remaining_bottom_time, Float, tag: "remainingbottomtime"
@@ -289,6 +383,10 @@ module UDDF
         has_one :switch_mix, SwitchMix, tag: "switchmix"
         has_many :tank_pressures, TankPressure, tag: "tankpressure"
         has_one :temperature, Float
+        has_many :timers, Timer, tag: "timer"
+        has_many :infos, Info, tag: "info"
+        has_many :ppco2s, PPCo2, tag: "ppco2"
+        has_many :scrubbers, Scrubber, tag: "scrubber"
       end
 
       class Medicine
@@ -316,8 +414,8 @@ module UDDF
 
         tag "plannedprofile"
 
-        attribute :start_dive_mode, String, tag: "startdivemode"
-        attribute :start_mix, String, tag: "startmix"
+        attribute :start_dive_mode, String
+        attribute :start_mix, String
         has_many :waypoints, Waypoint, tag: "waypoint"
       end
 
@@ -351,6 +449,7 @@ module UDDF
         has_one :altitude, Float
         has_one :apparatus, String
         has_one :datetime, DateTime
+        has_one :deep_stops, DeepStops, tag: "deepstops"
         has_one :dive_number, Integer, tag: "divenumber"
         has_one :dive_number_of_day, Integer, tag: "divenumberofday"
         has_one :internal_dive_number, Integer, tag: "internaldivenumber"
@@ -361,10 +460,13 @@ module UDDF
         has_one :platform, String
         has_one :price, Price
         has_one :purpose, String
+        has_many :rebreather_self_tests, RebreatherSelfTest, tag: "rebreatherselftest"
         has_one :state_of_rest_before_dive, String, tag: "stateofrestbeforedive"
+        has_many :self_tests, SelfTest, tag: "selftest"
         has_one :surface_interval_before_dive, SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
         has_one :surface_pressure, Float, tag: "surfacepressure"
         has_one :trip_membership, String, tag: "tripmembership"
+        has_many :timers, Timer, tag: "timer"
       end
 
       class Rating
@@ -526,6 +628,7 @@ module UDDF
         has_many :ratings, Rating, tag: "rating"
         has_one :surface_interval_after_dive, SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
         has_one :thermal_comfort, String, tag: "thermalcomfort"
+        has_many :timers, Timer, tag: "timer"
         has_one :visibility, Float
         has_one :workload, String
       end
@@ -544,6 +647,9 @@ module UDDF
         tag "tankdata"
 
         attribute :id, String
+
+        has_one :analysed_he, Float, tag: "analysedhe"
+        has_one :analysed_o2, Float, tag: "analysedo2"
         has_one :breathing_consumption_volume, Float, tag: "breathingconsumptionvolume"
         has_many :links, Link, tag: "link"
         has_one :tank_pressure_begin, Float, tag: "tankpressurebegin"
@@ -570,6 +676,8 @@ module UDDF
 
         has_one :deco_trainer, String, tag: "decotrainer"
         has_one :hargikas, Hargikas
+        has_one :apdiving, String
+        has_one :ratio, String
       end
 
       class Dive
@@ -655,7 +763,7 @@ module UDDF
 
         has_one :application_data, ApplicationData, tag: "applicationdata"
         has_one :deco_model, DecoModel, tag: "decomodel"
-        has_one :deep_stop_time, Float, tag: "deepstoptime"
+        has_one :deep_stops, DeepStops, tag: "deepstops"
         has_one :density, Float
         has_one :input_profile, InputProfile, tag: "inputprofile"
         has_many :links, Link, tag: "link"
@@ -688,6 +796,7 @@ module UDDF
         tag "table"
 
         has_one :table_scope, TableScope, tag: "tablescope"
+        has_one :deep_stops, DeepStops, tag: "deepstops"
       end
 
       class CalculateProfile
@@ -827,7 +936,7 @@ module UDDF
         tag "pricedivepackage"
 
         attribute :currency, String
-        attribute :no_of_dives, Integer, tag: "noofdives"
+        attribute :no_of_dives, Integer
         content :value, Float
       end
 
@@ -885,8 +994,8 @@ module UDDF
 
         tag "dateoftrip"
 
-        attribute :start_date, DateTime, tag: "startdate"
-        attribute :end_date, DateTime, tag: "enddate"
+        attribute :start_date, DateTime
+        attribute :end_date, DateTime
       end
 
       class Accommodation
@@ -1145,7 +1254,7 @@ module UDDF
         tag "membership"
 
         attribute :organisation, String
-        attribute :member_id, String, tag: "memberid"
+        attribute :member_id, String
       end
 
       class NumberOfDives
@@ -1263,6 +1372,32 @@ module UDDF
         has_one :shop, Shop
       end
 
+      class TemperatureSensor
+        include HappyMapper
+
+        tag "temperaturesensor"
+
+        attribute :id, String
+
+        has_many :alias_names, String, tag: "aliasname"
+        has_one :manufacturer, Manufacturer
+        has_one :model, String
+        has_one :name, String
+        has_one :next_service_date, Base::Models::DateTimeField, tag: "nextservicedate"
+        has_one :notes, Notes
+        has_one :purchase, Purchase
+        has_one :serial_number, String, tag: "serialnumber"
+        has_one :service_interval, Integer, tag: "serviceinterval"
+      end
+
+      class TimerDevice
+        include HappyMapper
+
+        tag "timerdevice"
+
+        attribute :id, String
+      end
+
       class EquipmentPart
         include HappyMapper
 
@@ -1294,7 +1429,11 @@ module UDDF
 
         tag "rebreather"
 
+        has_many :batteries, Battery, tag: "battery"
         has_many :o2_sensors, EquipmentPart, tag: "o2sensor"
+        has_many :scrubber_monitors, ScrubberMonitor, tag: "scrubbermonitor"
+        has_many :temperature_sensors, TemperatureSensor, tag: "temperaturesensor"
+        has_many :timer_devices, TimerDevice, tag: "timerdevice"
       end
 
       class Suit < EquipmentPart
@@ -1312,6 +1451,7 @@ module UDDF
 
         has_one :tank_material, String, tag: "tankmaterial"
         has_one :tank_volume, Float, tag: "tankvolume"
+        has_many :batteries, Battery, tag: "battery"
       end
 
       class Camera
@@ -1325,6 +1465,15 @@ module UDDF
         has_one :lens, EquipmentPart
       end
 
+      class DiveComputer < EquipmentPart
+        include HappyMapper
+
+        tag "divecomputer"
+
+        has_many :batteries, Battery, tag: "battery"
+        has_many :timer_devices, TimerDevice, tag: "timerdevice"
+      end
+
       class EquipmentContent
         include HappyMapper
 
@@ -1332,7 +1481,7 @@ module UDDF
         has_many :buoyancy_control_devices, EquipmentPart, tag: "buoyancycontroldevice"
         has_many :cameras, Camera, tag: "camera"
         has_many :compasses, EquipmentPart, tag: "compass"
-        has_many :dive_computers, EquipmentPart, tag: "divecomputer"
+        has_many :dive_computers, DiveComputer, tag: "divecomputer"
         has_many :fins, EquipmentPart, tag: "fins"
         has_many :gloves, EquipmentPart, tag: "gloves"
         has_many :knives, EquipmentPart, tag: "knife"
@@ -1416,38 +1565,22 @@ module UDDF
         has_one :personal, Personal
       end
 
-      class Buddy
+      class Buddy < BuddyOwnerShared
         include HappyMapper
 
         tag "buddy"
 
         attribute :id, String
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
-        has_one :dive_insurances, DiveInsurances, tag: "diveinsurances"
-        has_one :dive_permissions, DivePermissions, tag: "divepermissions"
-        has_one :equipment, Equipment
-        has_one :medical, Medical
-        has_one :notes, Notes
-        has_one :personal, Personal
         has_one :certification, Certification
         has_one :student, String
       end
 
-      class Owner
+      class Owner < BuddyOwnerShared
         include HappyMapper
 
         tag "owner"
 
         attribute :id, String
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
-        has_one :dive_insurances, DiveInsurances, tag: "diveinsurances"
-        has_one :dive_permissions, DivePermissions, tag: "divepermissions"
-        has_one :equipment, Equipment
-        has_one :medical, Medical
-        has_one :notes, Notes
-        has_one :personal, Personal
         has_one :education, Education
       end
 
@@ -1475,8 +1608,8 @@ module UDDF
 
         tag "setdcdivedethalarm"
 
-        has_one :dc_alarm, DCAlarm, tag: "dcalarm"
-        has_one :dc_alarm_depth, Float, tag: "dcalarmdepth"
+        has_one :dc_alarm, DCAlarm
+        has_one :dc_alarm_depth, Float
       end
 
       class SetDCDivePo2Alarm
@@ -1484,8 +1617,8 @@ module UDDF
 
         tag "setdcdivepo2alarm"
 
-        has_one :dc_alarm, DCAlarm, tag: "dcalarm"
-        has_one :maximum_po2, Float, tag: "maximumpo2"
+        has_one :dc_alarm, DCAlarm
+        has_one :maximum_po2, Float
       end
 
       class SetDCDiveSiteData
@@ -1493,7 +1626,7 @@ module UDDF
 
         tag "setdcdivesitedata"
 
-        attribute :dive_site, String, tag: "divesite"
+        attribute :dive_site, String
       end
 
       class SetDCDiveTimeAlarm
@@ -1501,7 +1634,7 @@ module UDDF
 
         tag "setdcdivetimealarm"
 
-        has_one :dc_alarm, DCAlarm, tag: "dcalarm"
+        has_one :dc_alarm, DCAlarm
         has_one :timespan, Float
       end
 
@@ -1510,7 +1643,7 @@ module UDDF
 
         tag "setdcendndtalarm"
 
-        has_one :dc_alarm, DCAlarm, tag: "dcalarm"
+        has_one :dc_alarm, DCAlarm
       end
 
       class SetDCDecoModel
@@ -1519,7 +1652,7 @@ module UDDF
         tag "setdcdecomodel"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :application_data, ApplicationData, tag: "applicationdata"
+        has_one :application_data, ApplicationData
         has_one :name, String
       end
 
@@ -1536,20 +1669,20 @@ module UDDF
 
         tag "setdcdata"
 
-        has_one :set_dc_alarm_time, DateTime, tag: "setdcalarmtime"
-        has_one :set_dc_altitude, Float, tag: "setdcaltitude"
-        has_one :set_dc_buddy_data, SetDCBuddyData, tag: "setdcbuddydata"
-        has_one :set_dc_date_time, DateTime, tag: "setdcdatetime"
-        has_one :set_dc_deco_model, SetDCDecoModel, tag: "setdcdecomodel"
-        has_one :set_dc_dive_depth_alarm, SetDCDiveDepthAlarm, tag: "setdcdivedethalarm"
-        has_one :set_dc_dive_po2_alarm, SetDCDivePo2Alarm, tag: "setdcdivepo2alarm"
+        has_one :set_dc_alarm_time, DateTime
+        has_one :set_dc_altitude, Float
+        has_one :set_dc_buddy_data, SetDCBuddyData
+        has_one :set_dc_date_time, DateTime
+        has_one :set_dc_deco_model, SetDCDecoModel
+        has_one :set_dc_dive_depth_alarm, SetDCDiveDepthAlarm
+        has_one :set_dc_dive_po2_alarm, SetDCDivePo2Alarm
         has_many :set_dc_dive_site_data, SetDCDiveSiteData, tag: "setdcdivesitedata"
-        has_one :set_dc_dive_time_alarm, SetDCDiveTimeAlarm, tag: "setdcdivetimealarm"
-        has_one :set_dc_end_ndt_alarm, SetDCEndNDTAlarm, tag: "setdcendndtalarm"
-        has_one :set_dc_gas_definitions_data, String, tag: "setdcgasdefinitionsdata"
-        has_one :set_dc_owner_data, String, tag: "setdcownerdata"
-        has_one :set_dc_password, String, tag: "setdcpassword"
-        has_one :set_dc_generator_data, String, tag: "setdcgeneratordata"
+        has_one :set_dc_dive_time_alarm, SetDCDiveTimeAlarm
+        has_one :set_dc_end_ndt_alarm, SetDCEndNDTAlarm
+        has_one :set_dc_gas_definitions_data, String
+        has_one :set_dc_owner_data, String
+        has_one :set_dc_password, String
+        has_one :set_dc_generator_data, String
       end
 
       class GetDCData
@@ -1557,14 +1690,14 @@ module UDDF
 
         tag "getdcdata"
 
-        has_one :get_dc_all_data, String, tag: "getdcalldata"
-        has_one :get_dc_generator_data, String, tag: "getdcgeneratordata"
-        has_one :get_dc_owner_data, String, tag: "getdcownerdata"
-        has_one :get_dc_buddy_data, String, tag: "getdcbuddydata"
-        has_one :get_dc_gas_definitions_data, String, tag: "getdcgasdefinitionsdata"
-        has_one :get_dc_dive_site_data, String, tag: "getdcdivesitedata"
-        has_one :get_dc_dive_trip_data, String, tag: "getdcdivetripdata"
-        has_one :get_dc_profile_data, String, tag: "getdcprofiledata"
+        has_one :get_dc_all_data, String
+        has_one :get_dc_generator_data, String
+        has_one :get_dc_owner_data, String
+        has_one :get_dc_buddy_data, String
+        has_one :get_dc_gas_definitions_data, String
+        has_one :get_dc_dive_site_data, String
+        has_one :get_dc_dive_trip_data, String
+        has_one :get_dc_profile_data, String
       end
 
       class DiveComputerDump
@@ -1573,7 +1706,7 @@ module UDDF
         tag "divecomputerdump"
 
         has_one :datetime, DateTime
-        has_one :dc_dump, String, tag: "dcdump"
+        has_one :dc_dump, String
         has_one :link, Link
       end
 

@@ -1,4 +1,8 @@
-plugins: rubocop-rake
+inherit_from: .rubocop_todo.yml
+
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
@@ -25,4 +29,7 @@ Style/Documentation:
   Exclude:
     - "spec/**/*"
     - "test/**/*"
+    - "lib/uddf/base/models.rb"
     - "lib/uddf/v323/models.rb"
+    - "lib/uddf/v330/models.rb"
+    - "lib/uddf/v331/models.rb"
