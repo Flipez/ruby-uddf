@@ -16,7 +16,7 @@ jobs:
         run: bundle exec rake
       - name: Run tests
         run: |
-          bundle exec rspec specs/
+          bundle exec rspec
       - uses: joshmfrankel/simplecov-check-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
