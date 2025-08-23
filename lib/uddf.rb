@@ -8,7 +8,7 @@ require "uddf/version"
 # Universal Dive Data Format (UDDF) parser and validator
 module UDDF
   SUPPORTED_SCHEMA_VERSIONS = %w[3.0.0 3.0.1 3.1.0 3.2.0 3.2.1 3.2.2 3.2.3 3.3.0 3.3.1].freeze
-  SUPPORTED_PARSER_VERSIONS = %w[3.2.3].freeze
+  SUPPORTED_PARSER_VERSIONS = %w[3.2.3 3.3.0].freeze
 
   @schema_cache_mutex = Mutex.new
 
@@ -55,6 +55,9 @@ module UDDF
     when "3.2.3"
       require "uddf/v323/models"
       V323::Models::Uddf
+    when "3.3.0"
+      require "uddf/v330/models"
+      V330::Models::Uddf
     end
   end
 

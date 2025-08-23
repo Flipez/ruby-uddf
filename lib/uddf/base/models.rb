@@ -34,6 +34,14 @@ module UDDF
         has_many :mobile_phones, String, tag: "mobilephone"
         has_many :phones, String, tag: "phone"
       end
+
+      class DateTimeField
+        include HappyMapper
+
+        tag "datetime"
+
+        content :value, DateTime
+      end
     end
   end
 end
