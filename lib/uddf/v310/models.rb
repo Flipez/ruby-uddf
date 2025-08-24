@@ -6,57 +6,6 @@ require "uddf/base/models"
 module UDDF
   module V310
     module Models
-      class Manufacturer
-        include HappyMapper
-
-        tag "manufacturer"
-
-        attribute :id, String
-        has_one :address, Base::Models::Address
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :contact, Base::Models::Contact
-        has_one :name, String
-      end
-
-      class Link
-        include HappyMapper
-
-        tag "link"
-
-        attribute :ref, String
-      end
-
-      class Generator
-        include HappyMapper
-
-        tag "generator"
-
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :datetime, DateTime
-        has_many :links, Link, tag: "link"
-        has_one :name, String
-        has_one :type, String
-        has_one :version, String
-      end
-
-      class Notes
-        include HappyMapper
-
-        tag "notes"
-
-        has_many :paras, String, tag: "para"
-        has_many :links, Link, tag: "link"
-      end
-
-      class Price
-        include HappyMapper
-
-        tag "price"
-
-        attribute :currency, String
-        content :value, Float
-      end
-
       class Tissue
         include HappyMapper
 
@@ -109,33 +58,6 @@ module UDDF
         has_many :buehlmanns, Buehlmann, tag: "buehlmann"
         has_many :rgbms, RGBM, tag: "rbgm"
         has_many :vpms, VPM, tag: "vpm"
-      end
-
-      class Mix
-        include HappyMapper
-
-        tag "mix"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :ar, Float
-        has_one :equivalent_air_depth, Float, tag: "equivalentairdepth"
-        has_one :h2, Float
-        has_one :he, Float
-        has_one :maximum_operation_depth, Float, tag: "maximumoperationdepth"
-        has_one :maximum_po2, Float, tag: "maximumpo2"
-        has_one :n2, Float
-        has_one :name, String
-        has_one :o2, Float
-        has_one :price_per_litre, Price, tag: "priceperlitre"
-      end
-
-      class GasDefinitions
-        include HappyMapper
-
-        tag "gasdefinitions"
-
-        has_many :mixes, Mix, tag: "mix"
       end
 
       class WayAltitude
@@ -288,26 +210,6 @@ module UDDF
         has_one :temperature, Float
       end
 
-      class Medicine
-        include HappyMapper
-
-        tag "medicine"
-
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-        has_one :periodically_taken, String, tag: "periodicallytaken"
-        has_one :timespan_before_dive, Float, tag: "timespanbeforedive"
-      end
-
-      class MedicationBeforeDive
-        include HappyMapper
-
-        tag "medicationbeforedive"
-
-        has_many :medicines, Medicine, tag: "medicine"
-      end
-
       class PlannedProfile
         include HappyMapper
 
@@ -318,58 +220,29 @@ module UDDF
         has_many :waypoints, Waypoint, tag: "waypoint"
       end
 
-      class Drink
-        include HappyMapper
-
-        tag "drink"
-
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-        has_one :periodically_taken, String, tag: "periodicallytaken"
-        has_one :timespan_before_dive, Float, tag: "timespanbeforedive"
-      end
-
-      class AlcoholBeforeDive
-        include HappyMapper
-
-        tag "alcoholbeforedive"
-
-        has_many :drinks, Drink, tag: "drink"
-      end
-
       class InformationBeforeDive
         include HappyMapper
 
         tag "informationbeforedive"
 
         has_one :air_temperature, Float, tag: "airtemperature"
-        has_one :alcohol_before_dive, AlcoholBeforeDive, tag: "alcoholbeforedive"
+        has_one :alcohol_before_dive, Base::Models::AlcoholBeforeDive, tag: "alcoholbeforedive"
         has_one :altitude, Float
         has_one :apparatus, String
         has_one :datetime, DateTime
         has_one :dive_number, Integer, tag: "divenumber"
         has_one :internal_dive_number, Integer, tag: "internaldivenumber"
-        has_many :links, Link, tag: "link"
-        has_one :medication_before_dive, MedicationBeforeDive, tag: "medicationbeforedive"
+        has_many :links, Base::Models::Link, tag: "link"
+        has_one :medication_before_dive, Base::Models::MedicationBeforeDive, tag: "medicationbeforedive"
         has_one :no_suit, String, tag: "nosuit"
         has_one :planned_profile, PlannedProfile, tag: "plannedprofile"
         has_one :platform, String
-        has_one :price, Price
+        has_one :price, Base::Models::Price
         has_one :purpose, String
         has_one :state_of_rest_before_dive, String, tag: "stateofrestbeforedive"
         has_one :surface_interval_before_dive, SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
         has_one :surface_pressure, Float, tag: "surfacepressure"
         has_one :trip_membership, String, tag: "tripmembership"
-      end
-
-      class Rating
-        include HappyMapper
-
-        tag "rating"
-
-        has_one :datetime, DateTime
-        has_one :rating_value, Integer, tag: "ratingvalue"
       end
 
       class GlobalAlarmsGiven
@@ -386,113 +259,7 @@ module UDDF
         tag "equipmentused"
 
         has_one :lead_quantity, Float, tag: "leadquantity"
-        has_many :links, Link, tag: "link"
-      end
-
-      class AnySymptoms
-        include HappyMapper
-
-        tag "anysymptoms"
-
-        has_one :notes, Notes
-      end
-
-      class Abundance
-        include HappyMapper
-
-        tag "abundance"
-
-        attribute :quality, String
-        attribute :occurrence, String
-        content :value, Integer
-      end
-
-      class Species
-        include HappyMapper
-
-        tag "species"
-
-        attribute :id, String
-        has_one :abundance, Abundance
-        has_one :age, Integer
-        has_one :dominance, String
-        has_one :life_stage, String, tag: "lifestage"
-        has_one :notes, Notes
-        has_one :scientific_name, String, tag: "scientificname"
-        has_one :sex, String
-        has_one :size, Float
-        has_one :trivial_name, String, tag: "trivialname"
-      end
-
-      class WithSpecies
-        include HappyMapper
-
-        has_many :species, Species, tag: "species"
-      end
-
-      class Invertebrata
-        include HappyMapper
-
-        tag "invertebrata"
-
-        has_one :ascidiacea, WithSpecies
-        has_one :bryozoan, WithSpecies
-        has_one :cnidaria, WithSpecies
-        has_one :coelenterata, WithSpecies
-        has_one :crustacea, WithSpecies
-        has_one :ctenophora, WithSpecies
-        has_one :echinodermata, WithSpecies
-        has_one :invertebrata_various, WithSpecies, tag: "invertebratavarious"
-        has_one :mollusca, WithSpecies
-        has_one :phoronidea, WithSpecies
-        has_one :plathelminthes, WithSpecies
-        has_one :porifera, WithSpecies
-      end
-
-      class Vertebrata
-        include HappyMapper
-
-        tag "vertebrata"
-
-        has_one :amphibia, WithSpecies
-        has_one :chondrichthyes, WithSpecies
-        has_one :mammalia, WithSpecies
-        has_one :osteichthyes, WithSpecies
-        has_one :reptilia, WithSpecies
-        has_one :vertebrata_various, WithSpecies, tag: "vertebratavarious"
-      end
-
-      class Fauna
-        include HappyMapper
-
-        tag "fauna"
-
-        has_one :invertebrata, Invertebrata
-        has_one :notes, Notes
-        has_one :vertebrata, Vertebrata
-      end
-
-      class Flora
-        include HappyMapper
-
-        tag "flora"
-
-        has_one :chlorophyceae, WithSpecies
-        has_one :flora_various, WithSpecies, tag: "floravarious"
-        has_one :notes, Notes
-        has_one :phaeophyceae, WithSpecies
-        has_one :rhodophyceae, WithSpecies
-        has_one :spermatophyta, WithSpecies
-      end
-
-      class Observations
-        include HappyMapper
-
-        tag "observations"
-
-        has_one :fauna, Fauna
-        has_one :flora, Flora
-        has_one :notes, Notes
+        has_many :links, Base::Models::Link, tag: "link"
       end
 
       class InformationAfterDive
@@ -500,7 +267,7 @@ module UDDF
 
         tag "informationafterdive"
 
-        has_one :any_symptoms, AnySymptoms, tag: "anysymptoms"
+        has_one :any_symptoms, Base::Models::AnySymptoms, tag: "anysymptoms"
         has_one :average_depth, Float, tag: "averagedepth"
         has_one :current, String
         has_one :desaturation_time, Float, tag: "desaturationtime"
@@ -514,12 +281,12 @@ module UDDF
         has_one :highest_po2, Float, tag: "highestpo2"
         has_one :lowest_temperature, Float, tag: "lowesttemperature"
         has_one :no_flight_time, Float, tag: "noflighttime"
-        has_one :notes, Notes
-        has_one :observations, Observations
+        has_one :notes, Base::Models::Notes
+        has_one :observations, Base::Models::Observations
         has_one :pressure_drop, Float, tag: "pressuredrop"
         has_many :problems, String, tag: "problems"
         has_one :program, String
-        has_many :ratings, Rating, tag: "rating"
+        has_many :ratings, Base::Models::Rating, tag: "rating"
         has_one :surface_interval_after_dive, SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
         has_one :thermal_comfort, String, tag: "thermalcomfort"
         has_one :visibility, Float
@@ -541,7 +308,7 @@ module UDDF
 
         attribute :id, String
         has_one :breathing_consumption_volume, Float, tag: "breathingconsumptionvolume"
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :tank_pressure_begin, Float, tag: "tankpressurebegin"
         has_one :tank_pressure_end, Float, tag: "tankpressureend"
         has_one :tank_volume, Float, tag: "tankvolume"
@@ -628,7 +395,7 @@ module UDDF
 
         tag "inputprofile"
 
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_many :waypoints, Waypoint, tag: "waypoint"
       end
 
@@ -654,7 +421,7 @@ module UDDF
         has_one :deep_stop_time, Float, tag: "deepstoptime"
         has_one :density, Float
         has_one :input_profile, InputProfile, tag: "inputprofile"
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :maximum_ascending_rate, Float, tag: "maximumascendingrate"
         has_one :mix_change, MixChange, tag: "mixchange"
         has_one :output, Output
@@ -727,7 +494,7 @@ module UDDF
         attribute :id, String
         has_one :application_data, ApplicationData, tag: "applicationdata"
         has_one :bottom_time_table_scope, BottomTimeTableScope, tag: "bottomtimetablescope"
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :output, Output
         has_one :title, String
       end
@@ -824,19 +591,7 @@ module UDDF
 
         tag "relateddives"
 
-        has_many :links, Link, tag: "link"
-      end
-
-      class ShipDimension
-        include HappyMapper
-
-        tag "shipdimension"
-
-        has_one :beam, Float
-        has_one :displacement, Float
-        has_one :draught, Float
-        has_one :length, Float
-        has_one :tonnage, Float
+        has_many :links, Base::Models::Link, tag: "link"
       end
 
       class Vessel
@@ -849,9 +604,9 @@ module UDDF
         has_one :contact, Base::Models::Contact
         has_one :marina, String
         has_one :name, String
-        has_one :notes, Notes
-        has_many :ratings, Rating, tag: "rating"
-        has_one :ship_dimension, ShipDimension, tag: "shipdimension"
+        has_one :notes, Base::Models::Notes
+        has_many :ratings, Base::Models::Rating, tag: "rating"
+        has_one :ship_dimension, Base::Models::ShipDimension, tag: "shipdimension"
         has_one :ship_type, String, tag: "shiptype"
       end
 
@@ -864,8 +619,8 @@ module UDDF
         has_one :address, Base::Models::Address
         has_one :contact, Base::Models::Contact
         has_one :name, String
-        has_one :notes, Notes
-        has_many :ratings, Rating, tag: "rating"
+        has_one :notes, Base::Models::Notes
+        has_many :ratings, Base::Models::Rating, tag: "rating"
       end
 
       class DateOfTrip
@@ -887,21 +642,8 @@ module UDDF
         has_one :category, String
         has_one :contact, Base::Models::Contact
         has_one :name, String
-        has_one :notes, Notes
-        has_many :ratings, Rating, tag: "rating"
-      end
-
-      class Geography
-        include HappyMapper
-
-        tag "geography"
-
-        has_one :address, Base::Models::Address
-        has_one :altitude, Float
-        has_one :latitude, Float
-        has_one :location, String
-        has_one :longitude, Float
-        has_one :time_zone, Float, tag: "timezone"
+        has_one :notes, Base::Models::Notes
+        has_many :ratings, Base::Models::Rating, tag: "rating"
       end
 
       class TripPart
@@ -912,13 +654,13 @@ module UDDF
         attribute :type, String
         has_one :accommodation, Accommodation
         has_one :date_of_trip, DateOfTrip, tag: "dateoftrip"
-        has_one :geography, Geography
-        has_many :links, Link, tag: "link"
+        has_one :geography, Base::Models::Geography
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :name, String
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :operator, Operator
         has_one :price_dive_package, PriceDivePackage, tag: "pricedivepackage"
-        has_one :price_per_dive, Price, tag: "priceperdive"
+        has_one :price_per_dive, Base::Models::Price, tag: "priceperdive"
         has_one :related_dives, RelatedDives, tag: "relateddives"
         has_one :vessel, Vessel
       end
@@ -931,7 +673,7 @@ module UDDF
         attribute :id, String
         has_many :alias_names, String, tag: "aliasname"
         has_one :name, String
-        has_many :ratings, Rating, tag: "rating"
+        has_many :ratings, Base::Models::Rating, tag: "rating"
         has_many :trip_parts, TripPart, tag: "trippart"
       end
 
@@ -943,141 +685,12 @@ module UDDF
         has_many :trips, Trip, tag: "trip"
       end
 
-      class Ecology
-        include HappyMapper
-
-        tag "ecology"
-
-        has_one :fauna, Fauna
-        has_one :flora, Flora
-      end
-
-      class Built
-        include HappyMapper
-
-        tag "built"
-
-        has_one :launching_date, Base::Models::DateTimeField, tag: "launchingdate"
-        has_one :ship_yard, String, tag: "shipyard"
-      end
-
-      class Wreck
-        include HappyMapper
-
-        tag "wreck"
-
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :built, Built
-        has_one :name, String
-        has_one :nationality, String
-        has_one :ship_dimension, ShipDimension, tag: "shipdimension"
-        has_one :ship_type, String, tag: "shiptype"
-        has_one :sunk, Base::Models::DateTimeField
-      end
-
-      class Shore
-        include HappyMapper
-
-        tag "shore"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-      end
-
-      class River
-        include HappyMapper
-
-        tag "river"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-      end
-
-      class Lake
-        include HappyMapper
-
-        tag "lake"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-      end
-
-      class Indoor
-        include HappyMapper
-
-        tag "indoor"
-
-        has_one :address, Base::Models::Address
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :contact, Base::Models::Contact
-        has_one :name, String
-        has_one :notes, Notes
-      end
-
-      class Cave
-        include HappyMapper
-
-        tag "cave"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :name, String
-        has_one :notes, Notes
-      end
-
-      class SiteData
-        include HappyMapper
-
-        tag "sidedata"
-
-        has_one :area_length, Float, tag: "arealength"
-        has_one :area_width, Float, tag: "areawidth"
-        has_one :average_visibility, Float, tag: "averagevisibility"
-        has_one :bottom, String
-        has_one :cave, Cave
-        has_one :density, Float
-        has_one :difficulty, Integer
-        has_one :global_light_intensity, String, tag: "globallightintensity"
-        has_one :indoor, Indoor
-        has_one :maximum_depth, Float, tag: "maximumdepth"
-        has_one :maximum_visibility, Float, tag: "maximumvisibility"
-        has_one :minimum_depth, Float, tag: "minimumdepth"
-        has_one :minimum_visibility, Float, tag: "minimumvisibility"
-        has_one :river, River
-        has_one :shore, Shore
-        has_one :terrain, String
-        has_one :wreck, Wreck
-      end
-
-      class Site
-        include HappyMapper
-
-        tag "site"
-
-        attribute :id, String
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :ecology, Ecology
-        has_one :environment, String
-        has_one :geography, Geography
-        has_many :links, Link, tag: "link"
-        has_one :name, String
-        has_one :notes, Notes
-        has_many :ratings, Rating, tag: "rating"
-        has_one :side_data, SiteData, tag: "sitedata"
-      end
-
       class Guide
         include HappyMapper
 
         tag "guide"
 
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
       end
 
       class DiveBase
@@ -1090,12 +703,12 @@ module UDDF
         has_many :alias_names, String, tag: "aliasname"
         has_one :contact, Base::Models::Contact
         has_many :guides, Guide, tag: "guide"
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :name, String
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :price_dive_package, PriceDivePackage, tag: "pricedivepackage"
-        has_one :price_per_dive, Price, tag: "priceperdive"
-        has_many :ratings, Rating, tag: "rating"
+        has_one :price_per_dive, Base::Models::Price, tag: "priceperdive"
+        has_many :ratings, Base::Models::Rating, tag: "rating"
       end
 
       class DiveSite
@@ -1104,19 +717,7 @@ module UDDF
         tag "divesite"
 
         has_many :dive_bases, DiveBase, tag: "divebase"
-        has_many :sites, Site, tag: "site"
-      end
-
-      class Shop
-        include HappyMapper
-
-        tag "shop"
-
-        has_many :alias_names, String, tag: "aliasname"
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
-        has_one :name, String
-        has_one :notes, Notes
+        has_many :sites, Base::Models::Site, tag: "site"
       end
 
       class Membership
@@ -1176,7 +777,7 @@ module UDDF
         has_one :instructor, Instructor
         has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :level, String
-        has_one :link, Link
+        has_one :link, Base::Models::Link
         has_one :organization, String
         has_one :specialty, String
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
@@ -1198,7 +799,7 @@ module UDDF
         has_many :alias_names, String, tag: "aliasname"
         has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :name, String
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
       end
 
@@ -1218,7 +819,7 @@ module UDDF
         has_many :alias_names, String, tag: "aliasname"
         has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :name, String
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :region, String
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
       end
@@ -1231,17 +832,6 @@ module UDDF
         has_many :permits, Permit, tag: "permit"
       end
 
-      class Purchase
-        include HappyMapper
-
-        tag "purchase"
-
-        has_one :datetime, DateTime
-        has_one :link, Link
-        has_one :price, Price
-        has_one :shop, Shop
-      end
-
       class EquipmentPart
         include HappyMapper
 
@@ -1249,12 +839,12 @@ module UDDF
 
         attribute :id, String
         has_many :alias_names, String, tag: "aliasname"
-        has_one :manufacturer, Manufacturer
+        has_one :manufacturer, Base::Models::Manufacturer
         has_one :model, String
         has_one :name, String
         has_one :next_service_date, Base::Models::DateTimeField, tag: "nextservicedate"
-        has_one :notes, Notes
-        has_one :purchase, Purchase
+        has_one :notes, Base::Models::Notes
+        has_one :purchase, Base::Models::Purchase
         has_one :serial_number, String, tag: "serialnumber"
         has_one :service_interval, Integer, tag: "serviceinterval"
       end
@@ -1333,9 +923,9 @@ module UDDF
         tag "equipmentconfiguration"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_many :links, Link, tag: "link"
+        has_many :links, Base::Models::Link, tag: "link"
         has_one :name, String
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
       end
 
       class Equipment < EquipmentContent
@@ -1366,8 +956,8 @@ module UDDF
         has_one :datetime, DateTime
         has_one :doctor, Doctor
         has_one :examination_result, String, tag: "examinationresult"
-        has_many :links, Link, tag: "link"
-        has_one :notes, Notes
+        has_many :links, Base::Models::Link, tag: "link"
+        has_one :notes, Base::Models::Notes
         has_one :total_lung_capacity, Float, tag: "totallungcapacity"
         has_one :vital_capacity, Float, tag: "vitalcapacity"
       end
@@ -1390,7 +980,7 @@ module UDDF
         has_one :dive_permissions, DivePermissions, tag: "divepermissions"
         has_one :equipment, Equipment
         has_one :medical, Medical
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :personal, Personal
       end
 
@@ -1406,7 +996,7 @@ module UDDF
         has_one :dive_permissions, DivePermissions, tag: "divepermissions"
         has_one :equipment, Equipment
         has_one :medical, Medical
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :personal, Personal
         has_one :certification, Certification
         has_one :student, String
@@ -1424,7 +1014,7 @@ module UDDF
         has_one :dive_permissions, DivePermissions, tag: "divepermissions"
         has_one :equipment, Equipment
         has_one :medical, Medical
-        has_one :notes, Notes
+        has_one :notes, Base::Models::Notes
         has_one :personal, Personal
         has_one :education, Education
       end
@@ -1552,7 +1142,7 @@ module UDDF
 
         has_one :datetime, DateTime
         has_one :dc_dump, String, tag: "dcdump"
-        has_one :link, Link
+        has_one :link, Base::Models::Link
       end
 
       class DiveComputerControl
@@ -1576,8 +1166,8 @@ module UDDF
         has_one :diver, Diver
         has_one :dive_site, DiveSite, tag: "divesite"
         has_one :dive_trip, DiveTrip, tag: "divetrip"
-        has_one :gas_definitions, GasDefinitions, tag: "gasdefinitions"
-        has_one :generator, Generator
+        has_one :gas_definitions, Base::Models::GasDefinitions, tag: "gasdefinitions"
+        has_one :generator, Base::Models::Generator
         has_one :media_data, MediaData, tag: "mediadata"
         has_one :profile_data, ProfileData, tag: "profiledata"
         has_one :table_generation, TableGeneration, tag: "tablegeneration"
