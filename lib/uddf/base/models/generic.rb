@@ -782,6 +782,57 @@ module UDDF
 
         has_many :permits, Permit, tag: "permit"
       end
+
+      class GlobalAlarmsGiven
+        include HappyMapper
+
+        tag "globalalarmsgiven"
+
+        has_many :global_alarms, String, tag: "globalalarm"
+      end
+
+      class WayAltitude
+        include HappyMapper
+
+        tag "wayaltitude"
+
+        attribute :way_time, Float, tag: "waytime"
+        content :value, Float
+      end
+
+      class ExposureToAltitude
+        include HappyMapper
+
+        tag "exposuretoaltitude"
+
+        has_one :altitude_of_exposure, Float, tag: "altitudeofexposure"
+        has_one :date_of_flight, Base::Models::DateTimeField, tag: "dateofflight"
+        has_one :surface_interval_before_altitude_exposure, Float, tag: "surfaceintervalbeforealtitudeexposure"
+        has_one :total_length_of_exposure, Float, tag: "totallengthofexposure"
+        has_one :transportation, String
+      end
+
+      class SurfaceIntervalBeforeDive
+        include HappyMapper
+
+        tag "surfaceintervalbeforedive"
+
+        has_one :exposure_to_altitude, ExposureToAltitude, tag: "exposuretoaltitude"
+        has_one :infinity, String
+        has_one :passed_time, Float, tag: "passedtime"
+        has_many :way_altitudes, WayAltitude, tag: "wayaltitude"
+      end
+
+      class SurfaceIntervalAfterDive
+        include HappyMapper
+
+        tag "surfaceintervalafterdive"
+
+        has_one :exposure_to_altitude, ExposureToAltitude, tag: "exposuretoaltitude"
+        has_one :infinity, String
+        has_one :passed_time, Float, tag: "passedtime"
+        has_many :way_altitudes, WayAltitude, tag: "wayaltitude"
+      end
     end
   end
 end

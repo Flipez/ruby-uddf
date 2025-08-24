@@ -61,49 +61,6 @@ module UDDF
         content :value, Float
       end
 
-      class WayAltitude
-        include HappyMapper
-
-        tag "wayaltitude"
-
-        attribute :way_time, Float
-        content :value, Float
-      end
-
-      class ExposureToAltitude
-        include HappyMapper
-
-        tag "exposuretoaltitude"
-
-        has_one :altitude_of_exposure, Float, tag: "altitudeofexposure"
-        has_one :date_of_flight, Base::Models::DateTimeField, tag: "dateofflight"
-        has_one :surface_interval_before_altitude_exposure, Float, tag: "surfaceintervalbeforealtitudeexposure"
-        has_one :total_length_of_exposure, Float, tag: "totallengthofexposure"
-        has_one :transportation, String
-      end
-
-      class SurfaceIntervalBeforeDive
-        include HappyMapper
-
-        tag "surfaceintervalbeforedive"
-
-        has_one :exposure_to_altitude, ExposureToAltitude, tag: "exposuretoaltitude"
-        has_one :infinity, String
-        has_one :passed_time, Float, tag: "passedtime"
-        has_many :way_altitudes, WayAltitude, tag: "wayaltitude"
-      end
-
-      class SurfaceIntervalAfterDive
-        include HappyMapper
-
-        tag "surfaceintervalafterdive"
-
-        has_one :exposure_to_altitude, ExposureToAltitude, tag: "exposuretoaltitude"
-        has_one :infinity, String
-        has_one :passed_time, Float, tag: "passedtime"
-        has_many :way_altitudes, WayAltitude, tag: "wayaltitude"
-      end
-
       class TankPressure
         include HappyMapper
 
@@ -293,18 +250,10 @@ module UDDF
         has_many :rebreather_self_tests, RebreatherSelfTest, tag: "rebreatherselftest"
         has_one :state_of_rest_before_dive, String, tag: "stateofrestbeforedive"
         has_many :self_tests, SelfTest, tag: "selftest"
-        has_one :surface_interval_before_dive, SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
+        has_one :surface_interval_before_dive, Base::Models::SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
         has_one :surface_pressure, Float, tag: "surfacepressure"
         has_one :trip_membership, String, tag: "tripmembership"
         has_many :timers, Timer, tag: "timer"
-      end
-
-      class GlobalAlarmsGiven
-        include HappyMapper
-
-        tag "globalalarmsgiven"
-
-        has_many :global_alarms, String, tag: "globalalarm"
       end
 
       class EquipmentUsed
@@ -330,7 +279,7 @@ module UDDF
         has_one :dive_table, String, tag: "divetable"
         has_one :equipment_malfunction, String, tag: "equipmentmalfunction"
         has_one :equipment_used, EquipmentUsed, tag: "equipmentused"
-        has_one :global_alarms_given, GlobalAlarmsGiven, tag: "globalalarmsgiven"
+        has_one :global_alarms_given, Base::Models::GlobalAlarmsGiven, tag: "globalalarmsgiven"
         has_one :greatest_depth, Float, tag: "greatestdepth"
         has_one :highest_po2, Float, tag: "highestpo2"
         has_one :lowest_temperature, Float, tag: "lowesttemperature"
@@ -341,7 +290,7 @@ module UDDF
         has_many :problems, String, tag: "problems"
         has_one :program, String
         has_many :ratings, Base::Models::Rating, tag: "rating"
-        has_one :surface_interval_after_dive, SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
+        has_one :surface_interval_after_dive, Base::Models::SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
         has_one :thermal_comfort, String, tag: "thermalcomfort"
         has_many :timers, Timer, tag: "timer"
         has_one :visibility, Float
@@ -470,8 +419,8 @@ module UDDF
         has_one :maximum_ascending_rate, Float, tag: "maximumascendingrate"
         has_one :mix_change, MixChange, tag: "mixchange"
         has_one :output, Output
-        has_one :surface_interval_after_dive, SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
-        has_one :surface_interval_before_dive, SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
+        has_one :surface_interval_after_dive, Base::Models::SurfaceIntervalAfterDive, tag: "surfaceintervalafterdive"
+        has_one :surface_interval_before_dive, Base::Models::SurfaceIntervalBeforeDive, tag: "surfaceintervalbeforedive"
         has_one :title, String
       end
 
