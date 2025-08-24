@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uddf (0.3.0)
+    uddf (0.4.0)
       nokogiri (~> 1.18)
       nokogiri-happymapper
 
