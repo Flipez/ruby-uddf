@@ -57,10 +57,10 @@ module UDDF
             else
               begin
                 DateTime.iso8601(content)
-              rescue ArgumentError, Date::Error
+              rescue ArgumentError, DateError
                 begin
                   DateTime.rfc3339(content)
-                rescue ArgumentError, Date::Error
+                rescue ArgumentError, DateError
                   DateTime.parse(content)
                 end
               end
@@ -77,9 +77,9 @@ module UDDF
         tag "manufacturer"
 
         attribute :id, String
-        has_one :address, Base::Models::Address
+        has_one :address, Address
         has_many :alias_names, String, tag: "aliasname"
-        has_one :contact, Base::Models::Contact
+        has_one :contact, Contact
         has_one :name, String
       end
 
@@ -505,7 +505,7 @@ module UDDF
 
         tag "personal"
 
-        has_one :birth_date, Base::Models::DateTimeField, tag: "birthdate"
+        has_one :birth_date, DateTimeField, tag: "birthdate"
         has_one :birth_name, String, tag: "birthname"
         has_one :blood_group, String, tag: "bloodgroup"
         has_one :first_name, String, tag: "firstname"
@@ -525,8 +525,8 @@ module UDDF
 
         tag "instructor"
 
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
+        has_one :address, Address
+        has_one :contact, Contact
         has_one :personal, Personal
       end
 
@@ -536,8 +536,8 @@ module UDDF
         tag "doctor"
 
         attribute :id, String
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
+        has_one :address, Address
+        has_one :contact, Contact
         has_one :personal, Personal
       end
 
@@ -549,8 +549,8 @@ module UDDF
         has_one :datetime, DateTime
         has_one :doctor, Doctor
         has_one :examination_result, String, tag: "examinationresult"
-        has_many :links, Base::Models::Link, tag: "link"
-        has_one :notes, Base::Models::Notes
+        has_many :links, Link, tag: "link"
+        has_one :notes, Notes
         has_one :total_lung_capacity, Float, tag: "totallungcapacity"
         has_one :vital_capacity, Float, tag: "vitalcapacity"
       end
@@ -569,26 +569,17 @@ module UDDF
         tag "certification"
 
         has_one :instructor, Instructor
-        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
+        has_one :issue_date, DateTimeField, tag: "issuedate"
         has_one :level, String
-        has_one :link, Base::Models::Link
+        has_one :link, Link
         has_one :organization, String
         has_one :specialty, String
-        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
+        has_one :valid_date, DateTimeField, tag: "validdate"
       end
 
-      class CertificationV322
+      class CertificationV322 < Certification
         include HappyMapper
 
-        tag "certification"
-
-        has_one :instructor, Instructor
-        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
-        has_one :level, String
-        has_one :link, Base::Models::Link
-        has_one :organization, String
-        has_one :specialty, String
-        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
         # Added in v3.2.2
         has_one :certificate_number, String, tag: "certificatenumber"
       end
@@ -601,10 +592,8 @@ module UDDF
         has_many :certifications, Certification, tag: "certification"
       end
 
-      class EducationV322
+      class EducationV322 < Education
         include HappyMapper
-
-        tag "education"
 
         has_many :certifications, CertificationV322, tag: "certification"
       end
@@ -614,14 +603,14 @@ module UDDF
 
         tag "vessel"
 
-        has_one :address, Base::Models::Address
+        has_one :address, Address
         has_many :alias_names, String, tag: "aliasname"
-        has_one :contact, Base::Models::Contact
+        has_one :contact, Contact
         has_one :marina, String
         has_one :name, String
-        has_one :notes, Base::Models::Notes
-        has_many :ratings, Base::Models::Rating, tag: "rating"
-        has_one :ship_dimension, Base::Models::ShipDimension, tag: "shipdimension"
+        has_one :notes, Notes
+        has_many :ratings, Rating, tag: "rating"
+        has_one :ship_dimension, ShipDimension, tag: "shipdimension"
         has_one :ship_type, String, tag: "shiptype"
       end
 
@@ -631,11 +620,11 @@ module UDDF
         tag "operator"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :address, Base::Models::Address
-        has_one :contact, Base::Models::Contact
+        has_one :address, Address
+        has_one :contact, Contact
         has_one :name, String
-        has_one :notes, Base::Models::Notes
-        has_many :ratings, Base::Models::Rating, tag: "rating"
+        has_one :notes, Notes
+        has_many :ratings, Rating, tag: "rating"
       end
 
       class DateOfTrip
@@ -652,13 +641,13 @@ module UDDF
 
         tag "accommodation"
 
-        has_one :address, Base::Models::Address
+        has_one :address, Address
         has_many :alias_names, String, tag: "aliasname"
         has_one :category, String
-        has_one :contact, Base::Models::Contact
+        has_one :contact, Contact
         has_one :name, String
-        has_one :notes, Base::Models::Notes
-        has_many :ratings, Base::Models::Rating, tag: "rating"
+        has_one :notes, Notes
+        has_many :ratings, Rating, tag: "rating"
       end
 
       class PriceDivePackage
@@ -676,7 +665,7 @@ module UDDF
 
         tag "relateddives"
 
-        has_many :links, Base::Models::Link, tag: "link"
+        has_many :links, Link, tag: "link"
       end
 
       class TripPart
@@ -687,13 +676,13 @@ module UDDF
         attribute :type, String
         has_one :accommodation, Accommodation
         has_one :date_of_trip, DateOfTrip, tag: "dateoftrip"
-        has_one :geography, Base::Models::Geography
-        has_many :links, Base::Models::Link, tag: "link"
+        has_one :geography, Geography
+        has_many :links, Link, tag: "link"
         has_one :name, String
-        has_one :notes, Base::Models::Notes
+        has_one :notes, Notes
         has_one :operator, Operator
         has_one :price_dive_package, PriceDivePackage, tag: "pricedivepackage"
-        has_one :price_per_dive, Base::Models::Price, tag: "priceperdive"
+        has_one :price_per_dive, Price, tag: "priceperdive"
         has_one :related_dives, RelatedDives, tag: "relateddives"
         has_one :vessel, Vessel
       end
@@ -706,7 +695,7 @@ module UDDF
         attribute :id, String
         has_many :alias_names, String, tag: "aliasname"
         has_one :name, String
-        has_many :ratings, Base::Models::Rating, tag: "rating"
+        has_many :ratings, Rating, tag: "rating"
         has_many :trip_parts, TripPart, tag: "trippart"
       end
 
@@ -723,7 +712,7 @@ module UDDF
 
         tag "guide"
 
-        has_many :links, Base::Models::Link, tag: "link"
+        has_many :links, Link, tag: "link"
       end
 
       class DiveBase
@@ -732,16 +721,16 @@ module UDDF
         tag "divebase"
 
         attribute :id, String
-        has_one :address, Base::Models::Address
+        has_one :address, Address
         has_many :alias_names, String, tag: "aliasname"
-        has_one :contact, Base::Models::Contact
+        has_one :contact, Contact
         has_many :guides, Guide, tag: "guide"
-        has_many :links, Base::Models::Link, tag: "link"
+        has_many :links, Link, tag: "link"
         has_one :name, String
-        has_one :notes, Base::Models::Notes
+        has_one :notes, Notes
         has_one :price_dive_package, PriceDivePackage, tag: "pricedivepackage"
-        has_one :price_per_dive, Base::Models::Price, tag: "priceperdive"
-        has_many :ratings, Base::Models::Rating, tag: "rating"
+        has_one :price_per_dive, Price, tag: "priceperdive"
+        has_many :ratings, Rating, tag: "rating"
       end
 
       class DiveSite
@@ -750,7 +739,7 @@ module UDDF
         tag "divesite"
 
         has_many :dive_bases, DiveBase, tag: "divebase"
-        has_many :sites, Base::Models::Site, tag: "site"
+        has_many :sites, Site, tag: "site"
       end
 
       class Insurance
@@ -759,10 +748,10 @@ module UDDF
         tag "insurance"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
+        has_one :issue_date, DateTimeField, tag: "issuedate"
         has_one :name, String
-        has_one :notes, Base::Models::Notes
-        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
+        has_one :notes, Notes
+        has_one :valid_date, DateTimeField, tag: "validdate"
       end
 
       class DiveInsurances
@@ -779,11 +768,11 @@ module UDDF
         tag "permit"
 
         has_many :alias_names, String, tag: "aliasname"
-        has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
+        has_one :issue_date, DateTimeField, tag: "issuedate"
         has_one :name, String
-        has_one :notes, Base::Models::Notes
+        has_one :notes, Notes
         has_one :region, String
-        has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
+        has_one :valid_date, DateTimeField, tag: "validdate"
       end
 
       class DivePermissions

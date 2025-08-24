@@ -61,7 +61,7 @@ module UDDF
 
         tag "applicationdata"
 
-        has_one :hargikas, Base::Models::Hargikas
+        has_one :hargikas, Hargikas
       end
 
       class ApplicationDataV310 < ApplicationDataV300
@@ -164,7 +164,7 @@ module UDDF
 
         has_one :datetime, DateTime
         has_one :dc_dump, String, tag: "dcdump"
-        has_one :link, Base::Models::Link
+        has_one :link, Link
       end
 
       class DiveComputerControlV300
