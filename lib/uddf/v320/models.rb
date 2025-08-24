@@ -4,7 +4,7 @@ require "happymapper"
 require "uddf/base/models"
 
 module UDDF
-  module V322
+  module V320
     module Models
       class Manufacturer
         include HappyMapper
@@ -289,10 +289,6 @@ module UDDF
         has_one :switch_mix, SwitchMix, tag: "switchmix"
         has_many :tank_pressures, TankPressure, tag: "tankpressure"
         has_one :temperature, Float
-        # Added in v3.2.2
-        has_one :body_temperature, Float, tag: "bodytemperature"
-        has_one :pulse_rate, Float, tag: "pulserate"
-        has_many :set_markers, String, tag: "setmarker"
       end
 
       class Medicine
@@ -1204,8 +1200,6 @@ module UDDF
         has_one :organization, String
         has_one :specialty, String
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
-        # Added in v3.2.2
-        has_one :certificate_number, String, tag: "certificatenumber"
       end
 
       class Education

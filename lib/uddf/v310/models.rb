@@ -4,7 +4,7 @@ require "happymapper"
 require "uddf/base/models"
 
 module UDDF
-  module V322
+  module V310
     module Models
       class Manufacturer
         include HappyMapper
@@ -98,8 +98,6 @@ module UDDF
         tag "buehlmann"
 
         attribute :id, String
-        has_one :gradient_factor_high, Float, tag: "gradientfactorhigh"
-        has_one :gradient_factor_low, Float, tag: "gradientfactorlow"
         has_many :tissues, Tissue, tag: "tissue"
       end
 
@@ -272,7 +270,6 @@ module UDDF
 
         has_many :alarms, Alarm, tag: "alarm"
         has_many :battery_charge_conditions, BatteryChargeCondition, tag: "batterychargecondition"
-        has_one :calculated_po2, Float, tag: "calculatedpo2"
         has_one :cns, Float
         has_many :deco_stops, Decostop, tag: "decostop"
         has_one :depth, Float
@@ -289,10 +286,6 @@ module UDDF
         has_one :switch_mix, SwitchMix, tag: "switchmix"
         has_many :tank_pressures, TankPressure, tag: "tankpressure"
         has_one :temperature, Float
-        # Added in v3.2.2
-        has_one :body_temperature, Float, tag: "bodytemperature"
-        has_one :pulse_rate, Float, tag: "pulserate"
-        has_many :set_markers, String, tag: "setmarker"
       end
 
       class Medicine
@@ -356,7 +349,6 @@ module UDDF
         has_one :apparatus, String
         has_one :datetime, DateTime
         has_one :dive_number, Integer, tag: "divenumber"
-        has_one :dive_number_of_day, Integer, tag: "divenumberofday"
         has_one :internal_dive_number, Integer, tag: "internaldivenumber"
         has_many :links, Link, tag: "link"
         has_one :medication_before_dive, MedicationBeforeDive, tag: "medicationbeforedive"
@@ -817,14 +809,6 @@ module UDDF
         has_many :video_files, Video, tag: "video"
       end
 
-      class Maker
-        include HappyMapper
-
-        tag "maker"
-
-        has_many :manufacturers, Manufacturer, tag: "manufacturer"
-      end
-
       class PriceDivePackage
         include HappyMapper
 
@@ -1135,14 +1119,6 @@ module UDDF
         has_one :notes, Notes
       end
 
-      class Business
-        include HappyMapper
-
-        tag "business"
-
-        has_one :shop, Shop
-      end
-
       class Membership
         include HappyMapper
 
@@ -1204,8 +1180,6 @@ module UDDF
         has_one :organization, String
         has_one :specialty, String
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
-        # Added in v3.2.2
-        has_one :certificate_number, String, tag: "certificatenumber"
       end
 
       class Education
@@ -1275,7 +1249,6 @@ module UDDF
 
         attribute :id, String
         has_many :alias_names, String, tag: "aliasname"
-        has_many :links, Link, tag: "link"
         has_one :manufacturer, Manufacturer
         has_one :model, String
         has_one :name, String
@@ -1598,7 +1571,6 @@ module UDDF
         tag "uddf"
 
         attribute :version, String
-        has_one :business, Business
         has_one :deco_model, DecoModel, tag: "decomodel"
         has_one :dive_computer_control, DiveComputerControl, tag: "divecomputercontrol"
         has_one :diver, Diver
@@ -1606,7 +1578,6 @@ module UDDF
         has_one :dive_trip, DiveTrip, tag: "divetrip"
         has_one :gas_definitions, GasDefinitions, tag: "gasdefinitions"
         has_one :generator, Generator
-        has_one :maker, Maker
         has_one :media_data, MediaData, tag: "mediadata"
         has_one :profile_data, ProfileData, tag: "profiledata"
         has_one :table_generation, TableGeneration, tag: "tablegeneration"
