@@ -51,35 +51,12 @@ module UDDF
   def self.load_models_for_version(version)
     validate_version_support(version, :parse)
 
-    case version
-    when "3.0.0"
-      require "uddf/v300/models"
-      V300::Models::Uddf
-    when "3.0.1"
-      require "uddf/v301/models"
-      V301::Models::Uddf
-    when "3.1.0"
-      require "uddf/v310/models"
-      V310::Models::Uddf
-    when "3.2.0"
-      require "uddf/v320/models"
-      V320::Models::Uddf
-    when "3.2.1"
-      require "uddf/v321/models"
-      V321::Models::Uddf
-    when "3.2.2"
-      require "uddf/v322/models"
-      V322::Models::Uddf
-    when "3.2.3"
-      require "uddf/v323/models"
-      V323::Models::Uddf
-    when "3.3.0"
-      require "uddf/v330/models"
-      V330::Models::Uddf
-    when "3.3.1"
-      require "uddf/v331/models"
-      V331::Models::Uddf
-    end
+    # convert version to module name ("3.2.3" -> "v323")
+    module_name = "v#{version.tr(".", "")}"
+
+    # require and load the module
+    require "uddf/#{module_name}/models"
+    const_get("#{module_name.upcase}::Models::Uddf")
   end
 
   def self.validate_version_support(version, operation)
