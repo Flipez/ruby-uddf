@@ -387,6 +387,10 @@ module UDDF
         has_many :infos, Info, tag: "info"
         has_many :ppco2s, PPCo2, tag: "ppco2"
         has_many :scrubbers, Scrubber, tag: "scrubber"
+        # Added in v3.2.2
+        has_one :body_temperature, Float, tag: "bodytemperature"
+        has_one :pulse_rate, Float, tag: "pulserate"
+        has_many :set_markers, String, tag: "setmarker"
       end
 
       class Medicine
@@ -1310,7 +1314,6 @@ module UDDF
 
         tag "certification"
 
-        has_one :certificate_number, String, tag: "certificatenumber"
         has_one :instructor, Instructor
         has_one :issue_date, Base::Models::DateTimeField, tag: "issuedate"
         has_one :level, String
@@ -1318,6 +1321,8 @@ module UDDF
         has_one :organization, String
         has_one :specialty, String
         has_one :valid_date, Base::Models::DateTimeField, tag: "validdate"
+        # Added in v3.2.2
+        has_one :certificate_number, String, tag: "certificatenumber"
       end
 
       class Education

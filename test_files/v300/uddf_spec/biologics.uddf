@@ -1,0 +1,161 @@
+<uddf version="3.0.0">
+    <!-- die <generator>-Sektion muß in jeder UDDF-Datei stehen -->
+    <generator>
+        <!-- Beschreibung des die UDDF-Datei erzeugenden Programmes -->
+    </generator>
+    <mediadata>
+        <!-- Deklaration aller Audio-, Bild- sowie Videodateien -->
+        <image id="img_rote_gorgonie">
+            <objectname>rote_gorgonie.jpg</objectname>
+            <!-- Sofern vorhanden, könnten hier zusätzlich noch mittels <imagedata> -->
+            <!-- weitere Informationen zu diesem Bild abgelegt werden (Blende, Verschlußzeit, -->
+            <!-- Datum und Uhrzeit der Aufnahme, Objektivbrennweite, eingestellte Entfernung) -->
+            <!-- (entsprechend bei den nachfolgend aufgelisteten Bildern) -->
+        </image>
+        <image id="img_eisseestern"><objectname>eisseestern.jpg</objectname></image>
+        <image id="img_5_zackis"><objectname>5_zackis.jpg</objectname></image>
+        <image id="img_meersalat_meerjunker"><objectname>meersalat_meerjunker.jpg</objectname></image>
+        <image id="img_heinz_neben_3_zackis"><objectname>heinz_neben_3_zackis.jpg</objectname></image>
+        <image id="img_portrait_grosser_roter_drachenkopf"><objectname>portrait_grosser_roter_drachenkopf.jpg</objectname></image>
+        <video id="video_untiefe_040928"><objectname>untiefe_040928.avi</objectname></video>
+    </mediadata>
+    <divesite>
+        <!-- Beschreibungen aller Tauchplätze -->
+        <site id="site_Untiefe_südlich_Gabiniere">
+            <name>Untiefe südlich des Ilot de la Gabiniere</name>
+            <geography>
+                <location>Ilot de la Gabiniere</location>
+                <address>
+                    <province>Cote d'Azur</province>
+                    <country>Frankreich</country>
+                </address>
+                <!-- Breiten- und Längengrad nicht bekannt -->
+                <altitude>0.0</altitude>
+            </geography>
+            <ecology>
+                <!-- Aufzählung der typischerweise anzutreffenden Pflanzen und Tiere -->
+                <fauna>
+                    <invertebrata>            <!-- Wirbellose -->
+                        <porifera>                <!-- Schwämme -->
+                            <species>
+                                <trivialname>Nierenschwamm</trivialname>
+                                <scientificname>Chondrosia reniformis</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Roter Krustenschwamm</trivialname>
+                                <scientificname>Crambe crambe</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Hellblauer Krustenschwamm</trivialname>
+                                <scientificname>Anchinoe</scientificname>
+                            </species>
+                        </porifera>
+                        <cnidaria>                <!-- Nesseltiere -->
+                            <species>
+                                <trivialname>Rote Gorgonie</trivialname>
+                                <scientificname>Paramuricea clavata (chamaeleon)</scientificname>
+                            </species>
+                        </cnidaria>
+                        <ascidiacea>              <!-- Seescheiden -->
+                            <species>
+                                <trivialname>Rote Seescheide</trivialname>
+                                <scientificname>Halocynthia papillosa</scientificname>
+                            </species>
+                        </ascidiacea>
+                        <echinodermata>           <!-- Stachelhäuter -->
+                            <species>
+                                <trivialname>Purpurseestern</trivialname>
+                                <scientificname>Echinaster sepositus</scientificname>
+                            </species>
+                        </echinodermata>
+                    </invertebrata>
+                    <vertebrata>              <!-- Wirbeltiere -->
+                        <osteichthyes>        <!-- Knochenfische -->
+                            <species>
+                                <trivialname>Mittelmeer-Muräne</trivialname>
+                                <scientificname>Muraena helena</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Brauner Zackenbarsch</trivialname>
+                                <scientificname>Epinephelus guaza</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Spitzkopf-Zackenbarsch</trivialname>
+                                <scientificname>Epinephelus alexandrinus</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Roter Fahnenbarsch</trivialname>
+                                <scientificname>Anthias anthias</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Mönchsfisch</trivialname>
+                                <scientificname>Chromis chromis</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Meerjunker</trivialname>
+                                <scientificname>Coris julis</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Zweibindenbrassen</trivialname>
+                                <scientificname>Diplodus vulgaris</scientificname>
+                            </species>
+                            <species>
+                                <trivialname>Brandbrassen</trivialname>
+                                <scientificname>Oblada melanura</scientificname>
+                            </species>
+                             <species>
+                                <trivialname>Pfauenlippfisch</trivialname>
+                                <scientificname>Symphodus tinca</scientificname>
+                            </species>
+                        </osteichthyes>
+                    </vertebrata>
+                </fauna>
+                <flora>
+                    <rhodophyceae>      <!-- Rotalgen -->
+                        <species>
+                            <trivialname>Peyssonnelia</trivialname>
+                            <scientificname>Peyssonnelia squamaria</scientificname>
+                        </species>
+                    </rhodophyceae>
+                    <chlorophyceae>     <!-- Grünalgen -->
+                        <species>
+                            <trivialname>Meersalat</trivialname>
+                            <scientificname>Ulva rigida</scientificname>
+                        </species>
+                        <species>
+                            <trivialname>Meerball</trivialname>
+                            <scientificname>Codium bursa</scientificname>
+                        </species>
+                    </chlorophyceae>
+                </flora>
+            </ecology>
+            <sitedata>
+                <minimumdepth>18.0</minimumdepth>
+                <maximumdepth>32.0</maximumdepth>
+                <arealength>20.0</arealength>         <!-- Länge des Felsens -->
+                <areawidth>8.0</areawidth>            <!-- Breite des Felsens -->
+                <!-- (aus den obigen vier Angaben kann ggfs. auch ein Volumen berechnet werden) -->
+                <density>1030.0</density>             <!-- Salzwasser -->
+                <bottom>Felsen</bottom>
+             </sitedata>
+            <notes>
+                <para>
+                    Erstklassiger Tauchplatz! Aufgrund von Strömung oftmals nur schwierig zu betauchen.
+                    Erreichbar entweder im Freiwasser-Abstieg vom Boot oder - bei guter (!) Kenntnis der
+                    Geländebeschaffenheit - von der Südspitze des Ilot de la Gabiniere aus nach Südwesten
+                    tauchend. Recht schmaler, langgezogener Felskamm, auf beiden Seiten steilwandartig.
+                    Dichter Bewuchs mit Algen, Schwämmen, Gorgonien. Viele Fische, insbesondere zahlreich
+                    anzutreffende Zackenbarsche.
+                </para>
+                <link ref="img_rote_gorgonie"/>
+                <link ref="img_eisseestern"/>
+                <link ref="img_5_zackis"/>
+                <link ref="img_meersalat_meerjunker"/>
+                <link ref="img_heinz_neben_3_zackis"/>
+                <link ref="img_portrait_grosser_roter_drachenkopf"/>
+                <link ref="video_untiefe_040928"/>
+            </notes>
+        </site>
+    </divesite>
+    <!-- weitere Tauchspots -->
+</uddf>

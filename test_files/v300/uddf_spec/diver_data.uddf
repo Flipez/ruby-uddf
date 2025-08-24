@@ -1,0 +1,202 @@
+<uddf version="3.0.0">
+    <!-- die <generator>-Sektion muß in jeder UDDF-Datei stehen -->
+    <generator>
+        <!-- Beschreibung des die UDDF-Datei erzeugenden Programmes -->
+        <name>STL - Super-Taucher-Logbuch</name>
+        <type>logbook</type>
+        <manufacturer>
+            <name>Tauchhelden-Company</name>
+            <address>
+                <!-- Adreßdaten des Herstellers -->
+            </address>
+            <contact>
+                <!-- Kontaktdaten des Herstellers -->
+            </contact>
+        </manufacturer>
+        <version>3.14159</version>
+        <datetime>2004-09-30</datetime>
+    </generator>
+    <mediadata>
+        <image id="img_arnos_plattfuesse">
+            <title>Arnos Plattfüße...</title>
+            <objectname>plattfuss.jpg</objectname>
+        </image>
+    </mediadata>
+    <diver>
+        <!-- hier werden zunächst die eigenen Daten (soweit gewünscht) abgelegt... -->
+        <owner id="owner_arno">
+            <!-- Beschreibung des Besitzers der UDDF-Datei (also die -->
+            <!-- eigenen Daten angegeben)                            -->
+            <personal>
+                <firstname>Arno</firstname>
+                <middlename>Albert</middlename>
+                <lastname>Alzheimer</lastname>
+                <honorific>Dr.</honorific>
+                <sex>male</sex>
+                <birthdate>
+                    <datetime>1919-02-30</datetime>
+                </birthdate>
+                <passport>987654321</passport>
+                <height>1.8</height>
+                <weight>86.0</weight>
+                <smoking>0</smoking>
+                <bloodgroup>A</bloodgroup>
+                <numberofdives timeinterval="P13Y/2006-02-16" dives="1234"/>
+                <membership organisation="VDST/CMAS" memberid="123456"/>
+            </personal>
+            <address>
+                <street>Auf der Heide 12</street>
+                <city>Aheim</city>
+                <postcode>12345</postcode>
+                <country>Deutschland</country>
+                <!-- Bundesland nicht angegeben -->
+            </address>
+            <contact>
+                <language>deutsch</language>
+                <phone>01234/567890</phone>
+                <email>arno@arno-alzheimer.org</email>
+                <homepage>http://www.tieftauchen.info/arno</homepage>
+            </contact>
+            <medical>
+                <examination>
+                    <datetime>2003-04-12</datetime>
+                    <doctor id="doctorDusel">
+                        <personal>
+                            <firstname>Dirk</firstname>
+                            <lastname>Dusel</lastname>
+                            <honorific>Dr.</honorific>
+                            <sex>male</sex>
+                            <birthdate>
+                                <!-- falls Geburtsdaten bekannt, können sie hier angegeben werden -->
+                            </birthdate>
+                        </personal>
+                        <address>
+                            <street>Duddelstr. 34</street>
+                            <city>Dortmund</city>
+                            <postcode>54321</postcode>
+                            <country>Deutschland</country>
+                            <province>Nordrhein-Westfalen</province>
+                        </address>
+                        <contact>
+                            <language>deutsch</language>
+                            <phone>01234/987654</phone>
+                            <!-- weder EMail-Adresse noch Homepage bekannt -->
+                        </contact>
+                    </doctor>
+                    <examinationresult>passed</examinationresult>
+                    <notes>
+                        <para>
+                            Plattfüße scheinen die Tauchtauglichkeit nicht zu beeinflussen :-)
+                        </para>
+                        <link ref="img_arnos_plattfuesse"/>
+                    </notes>
+                </examination>
+                <examination>
+                    <datetime>2004-04-20</datetime>
+                    <!-- nachfolgend eine Referenzierung auf den untersuchenden Arzt, -->
+                    <!-- da die Angaben zur Person bereits oben erfolgten             -->
+                    <link ref="doctorDusel"/>
+                    <examinationresult>passed</examinationresult>
+                </examination>
+            </medical>
+            <education>
+                <!-- alle Stufen der Tauchausbildung -> mehrere -->
+                <!-- <certification>-Elemente hintereinander    -->
+                <certification>
+                    <level>Bronze</level>
+                    <organisation>VDST/CMAS</organisation>
+                    <!-- da der damalige Tauchlehrer nicht in einer UDDF-Datei -->
+                    <!-- eingetragen wurde, entfällt auch die Referenz darauf  -->
+                    <!-- mittels <link ref="..."/>                          -->
+                    <issuedate>
+                        <datetime>1994-03-15</datetime>
+                    </issuedate>
+                </certification>
+                <certification>
+                    <specialty>Orientierung</specialty>
+                    <organisation>VDST/CMAS</organisation>
+                    <!-- da der damalige Tauchlehrer nicht in einer UDDF-Datei -->
+                    <!-- eingetragen wurde, entfällt auch die Referenz darauf  -->
+                    <!-- mittels <link ref="..."/>                          -->
+                    <issuedate>
+                        <datetime>1995-01-22</datetime>
+                    </issuedate>
+                </certification>
+                <certification>
+                    <level>Silber</level>
+                    <organisation>VDST/CMAS</organisation>
+                    <!-- da der damalige Tauchlehrer nicht in einer UDDF-Datei -->
+                    <!-- eingetragen wurde, entfällt auch die Referenz darauf  -->
+                    <!-- mittels <link ref="..."/>                          -->
+                    <issuedate>
+                        <datetime>1997-11-26</datetime>
+                    </issuedate>
+                </certification>
+                <certification>
+                    <level>Gold</level>
+                    <organisation>VDST/CMAS</organisation>
+                    <!-- da der damalige Tauchlehrer nicht in einer UDDF-Datei -->
+                    <!-- eingetragen wurde, entfällt auch die Referenz darauf  -->
+                    <!-- mittels <link ref="..."/>                          -->
+                    <issuedate>
+                        <datetime>2000-05-10</datetime>
+                    </issuedate>
+                </certification>
+            </education>
+            <divepermissions>
+                <!-- hier können beliebig viele Genehmigungen aufgelistet werden -->
+                <permit>
+                    <name>DiveCard</name>
+                    <region>Österreich</region>
+                    <issuedate>                        <!-- Ausstellungsdatum -->
+                        <datetime>2004-08-24</datetime>
+                    </issuedate>
+                    <validdate>                        <!-- Gültigkeitsdatum -->
+                        <datetime>2005-08-23</datetime>
+                    </validdate>
+                </permit>
+                <permit>
+                    <name>Zeeland</name>
+                    <region>Zeeland (Niederlande)</region>
+                    <issuedate>                        <!-- Ausstellungsdatum -->
+                        <datetime>1996-09-03</datetime>
+                    </issuedate>
+                    <validdate>                        <!-- Gültigkeitsdatum -->
+                        <datetime>2001-08-31</datetime>
+                    </validdate>
+                </permit>
+                <!-- hier gegebenenfalls weitere Genehmigungen -->
+            </divepermissions>
+            <!-- da keine zusätzlichen Tauchunfall-Versicherungen abgeschlossen -->
+            <!-- wurden, entfällt <diveinsurances>...</diveinsurances>        -->
+        </owner>
+        <!-- ... und nun folgen die Daten aller Tauchpartner (soweit bekannt) -->
+        <buddy id="buddy_bert_der_luftsauger">
+            <!-- Daten des ersten Tauchpartners -->
+            <personal>
+                <firstname>Bert</firstname>
+                <lastname>Bammel</lastname>
+            </personal>
+            <!-- keine Adreßdaten angegeben - <address>...</address> entfällt -->
+            <contact>
+                <email>luftsauger@tieftauchen.de</email>
+                <homepage>http://www.tieftauchen.info/bert</homepage>
+            </contact>
+        </buddy>
+        <buddy id="buddyCarsten">
+            <!-- Beschreibung eines weiteren Tauchpartners -->
+            <personal>
+                <firstname>Carsten</firstname>
+                <lastname>Cabuff</lastname>
+            </personal>
+            <!-- Adreßdaten nicht bekannt - <address>...</address> entfällt -->
+            <contact>
+                <email>lurchi@abcde.com</email>
+                <homepage>http://www.tieftauchen.info/carsten</homepage>
+            </contact>
+        </buddy>
+        <!-- hier können noch Beschreibungen von weiteren Tauchpartnern eingefügt werden -->
+    </diver>
+    <!-- hier könnten weitere Sektionen folgen, z.B. die Tauchprofildaten  -->
+    <!-- oder zur Generierung von Austauchtabellen -->
+</uddf>
