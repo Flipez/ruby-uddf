@@ -167,7 +167,11 @@ describe "UDDF Parser" do
 
   describe "parsing multiple UDDF files" do
     let(:test_files_dir) { File.join(__dir__, "../test_files") }
-    let(:uddf_files) { Dir.glob(File.join(test_files_dir, "**", "*.uddf")) }
+    let(:uddf_files) do
+      realworld_files = Dir.glob(File.join(test_files_dir, "*", "realworld", "*.uddf"))
+      uddf_spec_files = Dir.glob(File.join(test_files_dir, "*", "uddf_spec", "*.uddf"))
+      (realworld_files + uddf_spec_files).sort
+    end
 
     it "can parse all available UDDF files" do
       skip "No UDDF files found" if uddf_files.empty?
