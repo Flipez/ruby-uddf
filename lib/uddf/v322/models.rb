@@ -4,7 +4,7 @@ require "happymapper"
 require "uddf/base/models"
 
 module UDDF
-  module V323
+  module V322
     module Models
       class Manufacturer
         include HappyMapper
@@ -280,7 +280,6 @@ module UDDF
         has_one :dive_time, Float, tag: "divetime"
         has_one :gradient_factor, GradientFactor, tag: "gradientfactor"
         has_one :heading, Float
-        has_one :heart_rate, Float, tag: "heartrate"
         has_many :measured_po2s, MeasuredPo2, tag: "measuredpo2"
         has_one :no_deco_time, Float, tag: "nodecotime"
         has_one :otu, Float

@@ -21,7 +21,7 @@ Ruby parser and validator for Universal Dive Data Format (UDDF) files. Supports 
 | 3.1.0        | ✗      | ✓         |
 | 3.2.0        | ✗      | ✓         |
 | 3.2.1        | ✗      | ✓         |
-| 3.2.2        | ✗      | ✓         |
+| 3.2.2        | ✓      | ✓         |
 | 3.2.3        | ✓      | ✓         |
 | 3.3.0        | ✓      | ✓         |
 | 3.3.1        | ✓      | ✓         |
